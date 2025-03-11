@@ -9,4 +9,26 @@ spec:
       host: cloud.edge.youngandhungry.org
       trusted_domains:
         - cloud.edge.youngandhungry.org
-
+      objectStore:
+        s3:
+          enabled: false
+          accessKey: "your-access-key"
+          secretKey: "your-secret-key"
+          legacyAuth: false
+          host: "your-s3-endpoint"
+          ssl: true
+          port: "443"
+          region: "eu-west-1"
+          bucket: "your-bucket-name"
+          prefix: "your-prefix"
+          usePathStyle: false
+          autoCreate: false
+          storageClass: "STANDARD"
+          sse_c_key: "your-sse-c-key"
+          existingSecret: "your-existing-secret"
+          secretKeys:
+            host: "your-secret-key-host"
+            accessKey: "your-secret-key-accessKey"
+            secretKey: "your-secret-key-secretKey"
+            bucket: "your-secret-key-bucket"
+            sse_c_key: "your-secret-key-sse_c_ke
