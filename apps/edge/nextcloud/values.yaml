@@ -93,3 +93,14 @@ spec:
           storageClass: ""
           accessMode: ReadWriteOnce
           size: 8Gi
+
+    persistence:
+      enabled: true
+      size: 10Gi
+      storageClass: "local-path"
+
+    redis:
+      enabled: true
+    
+    imaginary:
+      enabled: true
