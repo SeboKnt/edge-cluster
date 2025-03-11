@@ -80,13 +80,10 @@ spec:
       enabled: true
       global:
         defaultStorageClass: ""
-
       auth:
         database: nextcloud
         username: nextcloud
         password: changeme
-        # Use existing secret (auth.rootPassword, auth.password, and auth.replicationPassword will be ignored).
-        # secret must contain the keys mariadb-root-password, mariadb-replication-password and mariadb-password
         existingSecret: ""
       architecture: standalone
       primary:
@@ -96,7 +93,3 @@ spec:
           storageClass: ""
           accessMode: ReadWriteOnce
           size: 8Gi
-    persistence:
-      enabled: true
-      accessMode: ReadWriteOnce
-      size: 8Gi
