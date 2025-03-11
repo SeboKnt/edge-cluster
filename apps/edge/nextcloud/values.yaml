@@ -6,4 +6,6 @@ metadata:
 spec:
   values:
     nextcloud:
+      trusted_domains:
+        - cloud.edge.youngandhungry.org
 
