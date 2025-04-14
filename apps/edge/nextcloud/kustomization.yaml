@@ -4,6 +4,6 @@ resources:
   - ../../base/nextcloud
   - ingress.yaml
 patches:
-  - path: nextcloud/values.yaml
+  - path: values.yaml
     target:
       kind: HelmRelease
