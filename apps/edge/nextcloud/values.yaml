@@ -4,6 +4,9 @@ metadata:
   name: nextcloud
   namespace: nextcloud
 spec:
+  chart:
+    spec:
+      version: ">=1.0.0"
   values:
     nextcloud:
       host: cloud.edge.youngandhungry.org
