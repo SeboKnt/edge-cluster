@@ -7,3 +7,5 @@ patches:
   - path: values.yaml
     target:
       kind: HelmRelease
+      name: nextcloud
+      namespace: nextcloud
