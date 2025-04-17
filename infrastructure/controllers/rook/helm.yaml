@@ -53,3 +53,6 @@ spec:
       mgr:
         count: 1
         allowMultiplePerNode: true
+      dashboard:
+        enabled: true
+        ssl: false
