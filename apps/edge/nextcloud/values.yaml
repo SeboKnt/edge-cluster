@@ -10,6 +10,18 @@ spec:
   values:
     nextcloud:
       host: cloud.edge.youngandhungry.org
+      username: admin
+      password: changeme
+      ## Use an existing secret
+      existingSecret:
+        enabled: false
+        # secretName: nameofsecret
+        usernameKey: nextcloud-username
+        passwordKey: nextcloud-password
+        tokenKey: ""
+        smtpUsernameKey: smtp-username
+        smtpPasswordKey: smtp-password
+        smtpHostKey: smtp-host
       trusted_domains:
         - cloud.edge.youngandhungry.org
       objectStore:
@@ -34,4 +46,48 @@ spec:
             accessKey: "your-secret-key-accessKey"
             secretKey: "your-secret-key-secretKey"
             bucket: "your-secret-key-bucket"
-            sse_c_key: "your-secret-key-sse_c_ke
+            sse_c_key: "your-secret-key-sse_c_key"
+
+    internalDatabase:
+      enabled: false
+      name: nextcloud
+
+    externalDatabase:
+      enabled: true
+      type: postgresql
+      host: "nextcloud-db-rw.default.svc.cluster.local"
+      user: nextcloud
+      password: "mySecretPassword"
+      database: nextcloud
+      existingSecret:
+        enabled: true
+        secretName: nextcloud-db-secret
+        usernameKey: POSTGRESQL_USER
+        passwordKey: POSTGRESQL_PASSWORD
+        # hostKey: db-hostname-or-ip
+        # databaseKey: db-name
+
+    redis:
+      enabled: false
+      auth:
+        enabled: true
+        password: 'changeme'
+        # name of an existing secret with Redis® credentials (instead of auth.password), must be created ahead of time
+        existingSecret: ""
+        # Password key to be retrieved from existing secret
+        existingSecretPasswordKey: ""
+      # Since Redis is used for caching only, you might want to use a storageClass with different reclaim policy and backup settings
+      global:
+        storageClass: ""
+      master:
+        persistence:
+          enabled: true
+      replica:
+        persistence:
+          enabled: true
+
+    imaginary:
+      enabled: true
+
+    metrics:
+      enabled: true

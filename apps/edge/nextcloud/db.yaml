@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nextcloud-db
+  namespace: default
+spec:
+  instances: 1
+  storage:
+    size: 10Gi
+  bootstrap:
+    initdb:
+      database: nextcloud
+      owner: nextcloud 
+      secret:
+        name: nextcloud-db-secret
+#  externalClusters:
+#    - name: nextcloud-db-external
+#      connection:
+#        host: nextcloud-db.default.svc.cluster.local
+#        port: 5432
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nextcloud-db-secret
+  namespace: default
+type: Opaque
+data:
+  POSTGRESQL_PASSWORD: bXlTZWNyZXRQYXNzd29yZA==
+  POSTGRESQL_USER: bmV4dGNsb3Vk 
