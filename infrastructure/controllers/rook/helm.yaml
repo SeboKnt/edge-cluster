@@ -59,6 +59,9 @@ spec:
       dashboard:
         enabled: true
         ssl: false
+      storage:
+        useAllNodes: true
+        useAllDevices: true
       configOverride: |
         [global]
         mon_allow_pool_delete = true
