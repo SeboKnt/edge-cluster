@@ -59,3 +59,22 @@ spec:
       dashboard:
         enabled: true
         ssl: false
+        resources:
+          mgr:
+            limits:
+              memory: "1Gi"
+            requests:
+              cpu: "500m"
+              memory: "512Mi"
+          mon:
+            limits:
+              memory: "2Gi"
+            requests:
+              cpu: "1000m"
+              memory: "512Mi"
+          osd:
+            limits:
+              memory: "4Gi"
+            requests:
+              cpu: "1000m"
+              memory: "1Gi"
