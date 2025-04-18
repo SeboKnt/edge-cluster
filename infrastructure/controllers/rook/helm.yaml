@@ -107,19 +107,3 @@ spec:
               requests:
                 cpu: "500m"
                 memory: "1Gi"
-
-    cephObjectStores:
-      - name: ceph-objectstore
-        spec:
-          metadataPool:
-            replicated:
-              size: 1
-          gateway:
-            port: 80
-            resources:
-              limits:
-                memory: "2Gi"
-              requests:
-                cpu: "500m"
-                memory: "1Gi"
-            instances: 1
