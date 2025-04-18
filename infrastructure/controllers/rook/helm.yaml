@@ -133,3 +133,5 @@ spec:
                 cpu: "500m"
                 memory: "1Gi"
             instances: 1
+          storageClass:
+            enabled: true 
