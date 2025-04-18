@@ -87,3 +87,47 @@ spec:
           requests:
             cpu: "500m"
             memory: "1Gi"
+
+    cephFileSystems:
+        spec:
+          metadataPool:
+            replicated:
+              size: 1
+          dataPools:
+            - failureDomain: host
+              replicated:
+                size: 1
+          metadataServer:
+            activeCount: 1
+            activeStandby: false
+            resources:
+              limits:
+                memory: "2Gi"
+              requests:
+                cpu: "500m"
+                memory: "2Gi"
+            priorityClassName: system-cluster-critical
+
+    cephObjectStores:
+        spec:
+          metadataPool:
+            failureDomain: host
+            replicated:
+              size: 1
+          dataPool:
+            failureDomain: host
+            erasureCoded:
+              dataChunks: 2
+              codingChunks: 1
+            parameters:
+              bulk: "true"
+          preservePoolsOnDelete: true
+          gateway:
+            port: 80
+            resources:
+              limits:
+                memory: "2Gi"
+              requests:
+                cpu: "500m"
+                memory: "1Gi"
+            instances: 1
