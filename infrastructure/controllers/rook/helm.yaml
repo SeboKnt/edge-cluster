@@ -44,6 +44,13 @@ spec:
       interval: 12h
   values:
     operatorNamespace: rook-ceph
+
+    configOverride: |
+      [global]
+      mon_allow_pool_delete = true
+      osd_pool_default_size = 1
+      osd_pool_default_min_size = 1
+
     toolbox:
       enabled: true
     cephClusterSpec:
@@ -63,11 +70,6 @@ spec:
       storage:
         useAllNodes: true
         useAllDevices: true
-      configOverride: |
-        [global]
-        mon_allow_pool_delete = true
-        osd_pool_default_size = 1
-        osd_pool_default_min_size = 1
       resources:
         mgr:
           limits:
