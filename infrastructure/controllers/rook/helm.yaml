@@ -100,3 +100,14 @@ spec:
               requests:
                 cpu: "500m"
                 memory: "1Gi"
+
+    cephObjectStores:
+      - name: ceph-objectstore
+        spec:
+          gateway:
+            resources:
+              limits:
+                memory: "2Gi"
+              requests:
+                cpu: "500m"
+                memory: "1Gi"
