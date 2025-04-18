@@ -59,22 +59,27 @@ spec:
       dashboard:
         enabled: true
         ssl: false
-        resources:
-          mgr:
-            limits:
-              memory: "1Gi"
-            requests:
-              cpu: "500m"
-              memory: "512Mi"
-          mon:
-            limits:
-              memory: "2Gi"
-            requests:
-              cpu: "1000m"
-              memory: "512Mi"
-          osd:
-            limits:
-              memory: "4Gi"
-            requests:
-              cpu: "1000m"
-              memory: "1Gi"
+      configOverride: |
+        [global]
+        mon_allow_pool_delete = true
+        osd_pool_default_size = 1
+        osd_pool_default_min_size = 1
+      resources:
+        mgr:
+          limits:
+            memory: "1Gi"
+          requests:
+            cpu: "500m"
+            memory: "512Mi"
+        mon:
+          limits:
+            memory: "2Gi"
+          requests:
+            cpu: "1000m"
+            memory: "512Mi"
+        osd:
+          limits:
+            memory: "4Gi"
+          requests:
+            cpu: "1000m"
+            memory: "1Gi"
