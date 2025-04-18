@@ -89,6 +89,7 @@ spec:
             memory: "1Gi"
 
     cephFileSystems:
+      - name: ceph-filesystem
         spec:
           metadataPool:
             replicated:
@@ -109,6 +110,7 @@ spec:
             priorityClassName: system-cluster-critical
 
     cephObjectStores:
+      - name: ceph-objectstore
         spec:
           metadataPool:
             failureDomain: host
