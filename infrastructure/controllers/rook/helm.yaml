@@ -106,24 +106,14 @@ spec:
                 memory: "2Gi"
               requests:
                 cpu: "500m"
-                memory: "2Gi"
-            priorityClassName: system-cluster-critical
+                memory: "1Gi"
 
     cephObjectStores:
       - name: ceph-objectstore
         spec:
           metadataPool:
-            failureDomain: host
             replicated:
               size: 1
-          dataPool:
-            failureDomain: host
-            erasureCoded:
-              dataChunks: 2
-              codingChunks: 1
-            parameters:
-              bulk: "true"
-          preservePoolsOnDelete: true
           gateway:
             port: 80
             resources:
@@ -133,5 +123,3 @@ spec:
                 cpu: "500m"
                 memory: "1Gi"
             instances: 1
-          storageClass:
-            enabled: true 
