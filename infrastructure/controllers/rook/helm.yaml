@@ -59,6 +59,7 @@ spec:
       dashboard:
         enabled: true
         ssl: false
+      removeOSDsIfOutAndSafeToRemove: true
       storage:
         useAllNodes: true
         useAllDevices: true
