@@ -48,7 +48,7 @@ spec:
       enabled: true
     cephClusterSpec:
       mon:
-        count: 3
+        count: 1
         allowMultiplePerNode: true
       mgr:
         count: 2
