@@ -5,7 +5,7 @@ metadata:
   name: ceph-bucket
   namespace: nextcloud
 spec:
-  generateBucketName: ceph-bkt
+  bucketName: ceph-bkt
   storageClassName: rook-ceph
 ---
 apiVersion: v1
