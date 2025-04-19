@@ -30,7 +30,7 @@ spec:
           #accessKey: "RS4D0ZGTXWZVKPFCPE1Ek"
           #secretKey: "FsNrdQTmq8ClwfU0WioUeFzobOghDe6nJRuSXkiLk"
           legacyAuth: false
-          host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local"
+          host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local:80"
           ssl: false
           port: "80"
           region: "eu-west-1"
