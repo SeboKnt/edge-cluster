@@ -27,8 +27,8 @@ spec:
       objectStore:
         s3:
           enabled: true
-          accessKey: "RS4D0ZGTXWZVKPFCPE1Ek"
-          secretKey: "FsNrdQTmq8ClwfU0WioUeFzobOghDe6nJRuSXkiLk"
+          #accessKey: "RS4D0ZGTXWZVKPFCPE1Ek"
+          #secretKey: "FsNrdQTmq8ClwfU0WioUeFzobOghDe6nJRuSXkiLk"
           legacyAuth: false
           host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local"
           ssl: false
@@ -40,11 +40,11 @@ spec:
           #autoCreate: false
           #storageClass: "STANDARD"
           #sse_c_key: "your-sse-c-key"
-          #existingSecret: "your-existing-secret"
-          #secretKeys:
+          existingSecret: "ceph-bucket"
+          secretKeys:
           #  host: "your-secret-key-host"
-          #  accessKey: "your-secret-key-accessKey"
-          #  secretKey: "your-secret-key-secretKey"
+            accessKey: "AWS_ACCESS_KEY_ID"
+            secretKey: "AWS_SECRET_ACCESS_KEY"
           #  bucket: "your-secret-key-bucket"
           #  sse_c_key: "your-secret-key-sse_c_key"
 

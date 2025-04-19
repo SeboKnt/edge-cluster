@@ -8,12 +8,12 @@ spec:
   bucketName: ceph-bkt
   storageClassName: ceph-bucket
 ---
-apiVersion: v1
-data:
-  AWS_ACCESS_KEY_ID: UlM0RDBaR1RYV1pWS1BGQ1BFMUU=
-  AWS_SECRET_ACCESS_KEY: RnNOcmRRVG1xOENsd2ZVMFdpb1VlRnpvYk9naERlNm5KUnVTWGtpTA==
-kind: Secret
-metadata:
-  name: ceph-bucket
-  namespace: nextcloud
-type: Opaque
+#apiVersion: v1
+#data:
+#  AWS_ACCESS_KEY_ID: UlM0RDBaR1RYV1pWS1BGQ1BFMUU=
+#  AWS_SECRET_ACCESS_KEY: RnNOcmRRVG1xOENsd2ZVMFdpb1VlRnpvYk9naERlNm5KUnVTWGtpTA==
+#kind: Secret
+#metadata:
+#  name: ceph-bucket
+#  namespace: nextcloud
+#type: Opaque
