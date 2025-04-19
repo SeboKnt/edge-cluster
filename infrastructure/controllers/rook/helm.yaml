@@ -53,9 +53,9 @@ spec:
       mgr:
         count: 2
         allowMultiplePerNode: true
-        #modules:
-        #  - name: rook
-        #    enabled: true
+        modules:
+          - name: rook
+            enabled: true
       dashboard:
         enabled: true
         port: 7000
