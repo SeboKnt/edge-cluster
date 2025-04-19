@@ -30,13 +30,13 @@ spec:
           #accessKey: "RS4D0ZGTXWZVKPFCPE1Ek"
           #secretKey: "FsNrdQTmq8ClwfU0WioUeFzobOghDe6nJRuSXkiLk"
           legacyAuth: false
-          host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local:80"
+          host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local"
           ssl: false
           port: "80"
           region: "eu-west-1"
           bucket: "ceph-bkt"
           #prefix: "your-prefix"
-          #usePathStyle: false
+          usePathStyle: true
           #autoCreate: false
           #storageClass: "STANDARD"
           #sse_c_key: "your-sse-c-key"
