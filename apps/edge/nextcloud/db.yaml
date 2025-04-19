@@ -27,4 +27,4 @@ metadata:
 type: Opaque
 data:
   POSTGRESQL_PASSWORD: bXlTZWNyZXRQYXNzd29yZA==
-  POSTGRESQL_USER: bmV4dGNsb3Vk 
+  POSTGRESQL_USER: bmV4dGNsb3Vk
