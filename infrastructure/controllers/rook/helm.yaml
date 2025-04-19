@@ -88,6 +88,17 @@ spec:
             cpu: "500m"
             memory: "1Gi"
 
+    cephBlockPools:
+      - name: ceph-blockpool
+        # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
+        spec:
+          failureDomain: host
+          replicated:
+            size: 3
+        storageClass:
+          enabled: true
+          name: ceph-block
+
     cephFileSystems:
       - name: ceph-filesystem
         spec:
@@ -134,3 +145,4 @@ spec:
             priorityClassName: system-cluster-critical
         storageClass:
           enabled: true
+          name: ceph-bucket
