@@ -63,11 +63,11 @@ spec:
       storage:
         useAllNodes: true
         useAllDevices: true
-      configOverride: |
-        [global]
-        mon_allow_pool_delete = true
-        osd_pool_default_size = 1
-        osd_pool_default_min_size = 1
+      #configOverride: |
+      #  [global]
+      #  mon_allow_pool_delete = true
+      #  osd_pool_default_size = 1
+      #  osd_pool_default_min_size = 1
       resources:
         mgr:
           limits:
