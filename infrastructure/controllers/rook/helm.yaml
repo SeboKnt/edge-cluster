@@ -58,6 +58,7 @@ spec:
         #    enabled: true
       dashboard:
         enabled: true
+        port: 7000
         ssl: false
       removeOSDsIfOutAndSafeToRemove: true
       storage:

@@ -3,7 +3,6 @@ kind: Kustomization
 resources:
   - ../../base/nextcloud
   - db.yaml
-  - ingress.yaml
 patches:
   - path: values.yaml
     target:
