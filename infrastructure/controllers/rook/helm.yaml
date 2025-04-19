@@ -111,6 +111,14 @@ spec:
               requests:
                 cpu: "500m"
                 memory: "1Gi"
+          metadataPool:
+            failureDomain: host
+            replicated:
+              size: 3
+          dataPools:
+            - failureDomain: host
+              replicated:
+                size: 3
         storageClass:
           enabled: true
           isDefault: false
