@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: rook-ceph
-      version: "v1.16.5"
+      version: "v1.17.0"
       sourceRef:
         kind: HelmRepository
         name: rook-release
@@ -36,7 +36,7 @@ spec:
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: "v1.16.5"
+      version: "v1.17.0"
       sourceRef:
         kind: HelmRepository
         name: rook-release
@@ -44,13 +44,6 @@ spec:
       interval: 12h
   values:
     operatorNamespace: rook-ceph
-
-    configOverride: |
-      [global]
-      mon_allow_pool_delete = true
-      osd_pool_default_size = 1
-      osd_pool_default_min_size = 1
-
     toolbox:
       enabled: true
     cephClusterSpec:
@@ -70,6 +63,11 @@ spec:
       storage:
         useAllNodes: true
         useAllDevices: true
+      configOverride: |
+        [global]
+        mon_allow_pool_delete = true
+        osd_pool_default_size = 1
+        osd_pool_default_min_size = 1
       resources:
         mgr:
           limits:
@@ -96,6 +94,17 @@ spec:
           metadataServer:
             activeCount: 1
             activeStandby: false
+            resources:
+              limits:
+                memory: "2Gi"
+              requests:
+                cpu: "500m"
+                memory: "1Gi"
+
+    cephObjectStores:
+      - name: ceph-objectstore
+        spec:
+          gateway:
             resources:
               limits:
                 memory: "2Gi"
@@ -136,4 +145,3 @@ spec:
             priorityClassName: system-cluster-critical
         storageClass:
           enabled: true
-          name: ceph-bucket
