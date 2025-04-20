@@ -68,7 +68,7 @@ spec:
         # databaseKey: db-name
 
     redis:
-      enabled: false
+      enabled: true
       auth:
         enabled: true
         password: 'changeme'
