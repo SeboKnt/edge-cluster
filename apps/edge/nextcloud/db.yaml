@@ -6,7 +6,7 @@ metadata:
 spec:
   instances: 1
   storage:
-    size: 10Gi
+    size: 30Gi
   bootstrap:
     initdb:
       database: nextcloud
@@ -26,7 +26,5 @@ metadata:
   namespace: nextcloud
 type: Opaque
 data:
-  POSTGRESQL_PASSWORD: bXlTZWNyZXRQYXNzd29yZA==
-  POSTGRESQL_USER: bmV4dGNsb3Vk
   username: bmV4dGNsb3Vk
   password: bXlTZWNyZXRQYXNzd29yZA==

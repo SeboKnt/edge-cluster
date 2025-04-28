@@ -57,15 +57,28 @@ spec:
       type: postgresql
       host: "nextcloud-db-rw.nextcloud.svc.cluster.local"
       user: nextcloud
-      password: "mySecretPassword"
-      database: nextcloud
       existingSecret:
         enabled: true
         secretName: nextcloud-db-secret
-        usernameKey: POSTGRESQL_USER
-        passwordKey: POSTGRESQL_PASSWORD
+        usernameKey: username
+        passwordKey: password
         # hostKey: db-hostname-or-ip
         # databaseKey: db-name
+
+
+    postgresql:
+      enabled: false
+      global:
+        postgresql:
+          auth:
+            username: nextcloud
+            password: changeme
+            database: nextcloud
+      primary:
+        persistence:
+          enabled: true
+
+
 
     redis:
       enabled: true
