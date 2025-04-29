@@ -10,9 +10,13 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-nginx
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+    - dns01:
+        webhook:
+          groupName: acme.edge.youngandhungry.org
+          solverName: hetzner
+          config:
+              secretName: hetzner-secret
+              apiUrl: https://dns.hetzner.com/api/v1
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -25,6 +29,19 @@ spec:
     privateKeySecretRef:
       name: letsencrypt-staging-nginx
     solvers:
-      - http01:
-          ingress:
-            class: nginx
+    - dns01:
+        webhook:
+          groupName: acme.edge.youngandhungry.org
+          solverName: hetzner
+          config:
+              secretName: hetzner-secret
+              apiUrl: https://dns.hetzner.com/api/v1
+---
+#apiVersion: v1
+#kind: Secret
+#metadata:
+#  name: hetzner-secret
+#  namespace: cert-manager
+#type: Opaque
+#data:
+#  api-key: your-key-base64-encoded
