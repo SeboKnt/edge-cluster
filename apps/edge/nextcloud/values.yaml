@@ -10,8 +10,8 @@ spec:
   values:
     nextcloud:
       host: cloud.edge.youngandhungry.org
-      username: admin
-      password: changeme
+      #username: admin
+      #password: changeme
       ## Use an existing secret
       existingSecret:
         enabled: false
