@@ -80,7 +80,7 @@ spec:
 
     persistence:
       # Nextcloud Data (/var/www/html)
-      enabled: false
+      enabled: true
       annotations: {}
       accessMode: ReadWriteOnce
       size: 8Gi
