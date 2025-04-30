@@ -37,11 +37,17 @@ spec:
               secretName: hetzner-secret
               apiUrl: https://dns.hetzner.com/api/v1
 ---
-#apiVersion: v1
-#kind: Secret
-#metadata:
-#  name: hetzner-secret
-#  namespace: cert-manager
-#type: Opaque
-#data:
-#  api-key: your-key-base64-encoded
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  creationTimestamp: null
+  name: hetzner-secret
+  namespace: cert-manager
+spec:
+  encryptedData:
+    api-key: AgC4ha05aUhoD2PXyjhdCqa8duI4pI6Lbb4BzGlwgM+r/pPs/R6kjTGUD4w1tBT24pOhiciO+uPPdz5f4SZ9bElRUPI0I2MUmagJpFe4k6zojKhatDbbD4SoKZUtMus0HwpPZ20C+xvT0Tebl+hnPYNUnuTIHCmSBJt+EFj8uo429jwSTlO3Rv3/SQSSoAtNRVS4CXReQidT3/NPWE4YctN1eQxpZg09iUoX2M31bO/DqU278IYJ0i4E4hXPTJWzItW4at4e963NTrvsrYJIvyiWzFE8lhkevLD78er6gxXs6JxFi0LukuYxnUj/r4y55S8Cwr4LhTEUIuPhrIrsES0Gdwt0Zm8mpHjCbIr4QsQEkgIc0Dxm5lWkkiE0rhMMN6Lbk6cdXabiWdnKFvULdFUFi5qaHTztzOU6WjOnfxqJJX40FXCGutd7+Y044i4BGdbUYswGA9olM2ZAOKUqL8C/3lVMsRIH3l+sRbsukHbq108QQrR3aix7FUociuyari2EjEqwfr9Kz1u5l/FihBgJaCcZzbSEmgg6bIfQO0n6ZJIvVpt5S5Gaj6ZpR3m4BcVWoF6arv6+9hHEEy+89mX0WzuMJE4SRALraDJrP1ee3NfXxfC0kMQUTpUfbbubF1UqNa/fDTxEFyu5Nd4LY0lf4q6oAo+M7PQrTLyBavnNrgqoIpFVjdY2w3hVF4ZuBrsSuZsx/UWw1GfBcGmdsCdtdhST5W0zvzb9wzCd840Agg==
+  template:
+    metadata:
+      creationTimestamp: null
+      name: hetzner-secret
+      namespace: cert-manager

@@ -30,7 +30,7 @@ spec:
   secretName: nextcloud-tls
   issuerRef:
     kind: ClusterIssuer
-    name: letsencrypt-staging
+    name: letsencrypt
   commonName: cloud.edge.youngandhungry.org
   dnsNames:
   - cloud.edge.youngandhungry.org
