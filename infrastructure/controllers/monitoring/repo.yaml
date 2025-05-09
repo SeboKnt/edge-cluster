@@ -1,0 +1,25 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: grafana
+  namespace: logging
+spec:
+  interval: 24h
+  url: https://grafana.github.io/helm-charts
+---
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: GitRepository
+metadata:
+  name: rancher-charts
+  namespace: cattle-monitoring-system
+spec:
+  interval: 24h
+  url: https://github.com/rancher/charts
+  ref:
+    branch: release-v2.10 # release-v2.9 works
+  ignore: |
+    # exclude all
+    /*
+    # include charts directory
+    !/charts/  
