@@ -33,7 +33,7 @@ metadata:
   name: homeassistant-pvc
   namespace: homeassistant
 spec:
-  storageClassName: default
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:

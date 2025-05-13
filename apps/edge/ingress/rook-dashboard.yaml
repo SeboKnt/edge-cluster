@@ -15,8 +15,21 @@ spec:
             name: rook-ceph-mgr-dashboard
             port:
               number: 7000
-
-#  tls:
-#  - hosts:
-#    - rook.edge.youngandhungry.org
-#    secretName: rook-ceph-dashboard-tls
+  tls:
+  - hosts:
+    - rook.edge.youngandhungry.org
+    secretName: rook-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: rook-tls
+  namespace: rook-ceph
+spec:
+  secretName: rook-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: rook.edge.youngandhungry.org
+  dnsNames:
+  - rook.edge.youngandhungry.org
