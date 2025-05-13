@@ -28,22 +28,12 @@ spec:
             claimName: homeassistant-pvc
 ---
 apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: homeassistant-pv
-  namespace: homeassistant
-spec:
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
----
-apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: homeassistant-pvc
   namespace: homeassistant
 spec:
+  storageClassName: default
   accessModes:
     - ReadWriteOnce
   resources:
