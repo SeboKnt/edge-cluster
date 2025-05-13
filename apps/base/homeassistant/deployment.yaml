@@ -26,16 +26,3 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: homeassistant-pvc
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: homeassistant-pvc
-  namespace: homeassistant
-spec:
-  storageClassName: local-path
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 10Gi
