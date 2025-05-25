@@ -6,4 +6,4 @@ resources:
   - ./nginx-ingress
   - ./rook
   - ./sealed-secret
-  #- ./velero
+  - ./velero
