@@ -28,3 +28,7 @@ spec:
       volumeMounts:
       - mountPath: /target
         name: plugins
+    configuration:
+      backupStorageLocation:
+        - name: dummy
+          provider: aws
