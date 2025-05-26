@@ -1,0 +1,18 @@
+---
+apiVersion: velero.io/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: default
+  namespace: velero
+  labels:
+    app.kubernetes.io/managed-by: Helm
+  annotations:
+    meta.helm.sh/release-name: velero
+    meta.helm.sh/release-namespace: velero
+spec:
+  provider: aws
+  #credential:
+  #  name: hetzner-s3-credentials
+  #  key: cloud
+  config:
+    region: eu-central-1
