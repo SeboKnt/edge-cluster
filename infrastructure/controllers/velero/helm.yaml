@@ -32,3 +32,5 @@ spec:
       backupStorageLocation:
         - name: dummy
           provider: aws
+          bucket: dummy-bucket
+
