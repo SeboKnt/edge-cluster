@@ -33,4 +33,7 @@ spec:
         - name: dummy
           provider: aws
           bucket: dummy-bucket
+      volumeSnapshotLocation:
+        - name: dummy
+          provider: aws
 
