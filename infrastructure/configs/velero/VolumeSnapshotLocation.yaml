@@ -11,8 +11,8 @@ metadata:
     meta.helm.sh/release-namespace: velero
 spec:
   provider: aws
-  #credential:
-  #  name: hetzner-s3-credentials
-  #  key: cloud
+  credential:
+    name: minio-s3-credentials
+    key: cloud
   config:
     region: eu-central-1

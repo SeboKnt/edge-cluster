@@ -14,10 +14,10 @@ spec:
   provider: aws
   objectStorage:
     bucket: velero
-  #credential:
-  #  name: hetzner-s3-credentials
-  #  key: cloud
+  credential:
+    name: minio-s3-credentials
+    key: cloud
   config:
     region: eu-central-1
     s3ForcePathStyle: "true"
-    #s3Url: https://omv.youngandhungry.org:9000
+    s3Url: https://omv.youngandhungry.org:9000

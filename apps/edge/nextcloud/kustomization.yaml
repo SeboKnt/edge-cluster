@@ -4,6 +4,7 @@ resources:
   - ../../base/nextcloud
   - s3.yaml
   - db.yaml
+  - velero.yaml
 patches:
   - path: values.yaml
     target:
