@@ -36,7 +36,7 @@ spec:
           default: true
           config:
             region: eu-central-1
-            s3Url: https://omv.youngandhungry.org:9000
+            s3Url: http://omv.youngandhungry.org:9000
             insecureSkipTLSVerify: true
             s3ForcePathStyle: true
           credential:
@@ -48,6 +48,6 @@ spec:
           default: true
           config:
             region: eu-central-1
-            s3Url: https://omv.youngandhungry.org:9000
+            s3Url: http://omv.youngandhungry.org:9000
             insecureSkipTLSVerify: true
             s3ForcePathStyle: true
