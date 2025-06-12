@@ -30,10 +30,22 @@ spec:
         name: plugins
     configuration:
       backupStorageLocation:
-        - name: dummy
+        - name: omv
           provider: aws
-          bucket: dummy-bucket
+          bucket: velero
+          default: true
+          config:
+            region: eu-central-1
+            s3Url: https://omv.youngandhungry.org:9000
+            insecureSkipTLSVerify: true
+          credential:
+            name: minio-s3-credentials
+            key: cloud
       volumeSnapshotLocation:
-        - name: dummy
+        - name: omv
           provider: aws
-
+          default: true
+          config:
+            region: eu-central-1
+            s3Url: https://omv.youngandhungry.org:9000
+            insecureSkipTLSVerify: true
