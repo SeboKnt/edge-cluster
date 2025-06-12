@@ -21,3 +21,4 @@ spec:
     region: eu-central-1
     s3ForcePathStyle: "true"
     s3Url: https://omv.youngandhungry.org:9000
+    insecureSkipTLSVerify: "true"
