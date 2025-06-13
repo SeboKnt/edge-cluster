@@ -4,6 +4,7 @@ resources:
   - ./capacitor
   - ./cert-manager
   - ./cloudnative-pg
+  - ./longhorn
   - ./nginx-ingress
   - ./rook
   - ./sealed-secret
