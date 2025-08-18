@@ -64,6 +64,8 @@ spec:
       storage:
         useAllNodes: true
         useAllDevices: true
+        config:
+          osdsPerDevice: "1"
       #configOverride: |
       #  [global]
       #  mon_allow_pool_delete = true
@@ -71,6 +73,11 @@ spec:
       #  osd_pool_default_min_size = 1
       resources:
         mgr:
+          modules:
+            - name: pg_autoscaler
+              enabled: true
+            - name: balancer
+              enabled: true
           limits:
             memory: "1Gi"
           requests:
