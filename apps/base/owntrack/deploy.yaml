@@ -13,6 +13,13 @@ spec:
       labels:
         app: owntrack
     spec:
+      initContainers:
+        - name: fix-permissions
+          image: busybox:latest
+          command: ['sh', '-c', 'chown -R 1000:1000 /store']
+          volumeMounts:
+            - name: store
+              mountPath: /store
       containers:
         - name: otrecorder
           image: owntracks/recorder:latest
@@ -39,7 +46,7 @@ spec:
               mountPath: /store
               readOnly: true
 
-
+        # Filebrowser to upload / migrate files
         - name: filebrowser
           image: filebrowser/filebrowser:latest
           args:
