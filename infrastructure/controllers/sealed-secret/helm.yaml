@@ -24,3 +24,6 @@ spec:
         namespace: kube-system
   interval: 5m
   values:
+    resources:
+      requests: {}
+    priorityClassName: ""

@@ -81,19 +81,19 @@ spec:
           limits:
             memory: "1Gi"
           requests:
-            cpu: "500m"
+            cpu: "300m"
             memory: "1Gi"
         mon:
           limits:
             memory: "2Gi"
           requests:
-            cpu: "500m"
+            cpu: "300m"
             memory: "1Gi"
         osd:
           limits:
             memory: "4Gi"
           requests:
-            cpu: "500m"
+            cpu: "300m"
             memory: "1Gi"
 
     cephBlockPools:
@@ -118,7 +118,7 @@ spec:
                 cpu: "1"
                 memory: "2Gi"
               requests:
-                cpu: "500m"
+                cpu: "300m"
                 memory: "1Gi"
           metadataPool:
             failureDomain: host
@@ -151,7 +151,7 @@ spec:
               limits:
                 memory: "2Gi"
               requests:
-                cpu: "500m"
+                cpu: "300m"
                 memory: "1Gi"
             instances: 1
             priorityClassName: system-cluster-critical

@@ -3,3 +3,9 @@ kind: Kustomization
 resources:
 - gotk-components.yaml
 - gotk-sync.yaml
+
+patchesStrategicMerge:
+	- patches/helm-controller-resources.yaml
+	- patches/kustomize-controller-resources.yaml
+	- patches/notification-controller-resources.yaml
+	- patches/source-controller-resources.yaml
