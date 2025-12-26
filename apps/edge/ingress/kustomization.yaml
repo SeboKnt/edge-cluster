@@ -5,4 +5,5 @@ resources:
   #- ./homeassistant.yaml
   - ./nextcloud.yaml
   - ./owntrack.yaml
+  - ./owntrack-files.yaml
   - ./rook-dashboard.yaml
