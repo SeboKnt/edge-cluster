@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: owntrack
+  namespace: owntrack
+spec:
+  selector:
+    app: owntrack
+  ports:
+    - name: http
+      port: 8083
+      targetPort: 8083
+      
+    # Filebrowser
+    - name: web
+      port: 8080
+      targetPort: 8080

@@ -1,0 +1,63 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: owntrack
+  namespace: owntrack
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: owntrack
+  template:
+    metadata:
+      labels:
+        app: owntrack
+    spec:
+      containers:
+        - name: otrecorder
+          image: owntracks/recorder:latest
+          ports:
+            - name: http
+              containerPort: 8083
+          env:
+            - name: OTR_PORT
+              value: "0"
+          volumeMounts:
+            - name: store
+              mountPath: /store
+
+        # Owntrack writes logs into file -> sidecar
+        - name: promtail
+          image: grafana/promtail:latest
+          args:
+            - -config.file=/etc/promtail/config.yaml
+          volumeMounts:
+            - name: promtail-config
+              mountPath: /etc/promtail/config.yaml
+              subPath: config.yaml
+            - name: store
+              mountPath: /store
+              readOnly: true
+
+
+        - name: filebrowser
+          image: filebrowser/filebrowser:latest
+          args:
+            - --root=/srv
+            - --database=/srv/.filebrowser.db
+            - --address=0.0.0.0
+            - --port=8080
+          ports:
+            - name: web
+              containerPort: 8080
+          volumeMounts:
+            - name: store
+              mountPath: /srv
+
+      volumes:
+        - name: promtail-config
+          configMap:
+            name: promtail-config
+        - name: store
+          persistentVolumeClaim:
+            claimName: owntrack-store

@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: owntrack
+  namespace: owntrack
+spec:
+  rules:
+  - host: track.edge.youngandhungry.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: owntrack
+            port:
+              number: 8083
+  tls:
+  - hosts:
+    - track.edge.youngandhungry.org
+    secretName: owntrack-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: owntrack-tls
+  namespace: owntrack
+spec:
+  secretName: owntrack-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: track.edge.youngandhungry.org
+  dnsNames:
+  - track.edge.youngandhungry.org
