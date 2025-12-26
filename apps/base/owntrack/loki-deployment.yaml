@@ -13,6 +13,14 @@ spec:
       labels:
         app: loki
     spec:
+      # loki is not allowd to write
+      initContainers:
+        - name: fix-permissions
+          image: busybox:latest
+          command: ['sh', '-c', 'chown -R 10001:10001 /loki']
+          volumeMounts:
+            - name: data
+              mountPath: /loki
       containers:
         - name: loki
           image: grafana/loki:latest
