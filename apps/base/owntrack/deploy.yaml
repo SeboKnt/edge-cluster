@@ -35,15 +35,16 @@ spec:
             - name: store
               mountPath: /store
 
-        # Owntrack writes logs into file -> sidecar
-        - name: promtail
-          image: grafana/promtail:latest
+        # Owntrack writes logs into file -> sidecar (Grafana Alloy)
+        - name: alloy
+          image: grafana/alloy:latest
           args:
-            - -config.file=/etc/promtail/config.yaml
+            - run
+            - /etc/alloy/config.alloy
           volumeMounts:
-            - name: promtail-config
-              mountPath: /etc/promtail/config.yaml
-              subPath: config.yaml
+            - name: alloy-config
+              mountPath: /etc/alloy/config.alloy
+              subPath: config.alloy
             - name: store
               mountPath: /store
               readOnly: true
@@ -64,9 +65,9 @@ spec:
               mountPath: /srv
 
       volumes:
-        - name: promtail-config
+        - name: alloy-config
           configMap:
-            name: promtail-config
+            name: alloy-config
         - name: store
           persistentVolumeClaim:
             claimName: owntrack-store
