@@ -7,8 +7,8 @@ data:
   config.alloy: |
     local.file_match "owntracks" {
       path_targets = [{
-        __path__ = "/store/rec/user/*/*.rec"
-        job      = "owntracks"
+        __path__ = "/store/rec/user/*/*.rec",
+        job      = "owntracks",
       }]
     }
 
