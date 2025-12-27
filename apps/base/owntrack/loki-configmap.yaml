@@ -10,6 +10,8 @@ data:
     ingester:
       chunk_idle_period: 3m
       max_chunk_age: 1h
+      wal:
+        dir: "/tmp/wal"
       lifecycler:
         ring:
           kvstore:
