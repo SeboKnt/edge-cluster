@@ -32,6 +32,14 @@ spec:
           ports:
             - name: http
               containerPort: 3100
+          livenessProbe:
+            httpGet:
+              path: /ready
+              port: 3100
+            initialDelaySeconds: 60
+            periodSeconds: 10
+            timeoutSeconds: 10
+            failureThreshold: 2
           volumeMounts:
             - name: config
               mountPath: /etc/loki
@@ -58,7 +66,12 @@ spec:
                 COUNT=$(echo "$RESPONSE" | grep -o '\["[0-9]*","[^"]*"\]' | wc -l)
                 if [ "$COUNT" -ge 2 ]; then
                   echo "Duplicates detected: $COUNT entries. Killing Loki."
-                  pkill -TERM loki || true
+                  LOKI_PID=$(ps -o pid,comm | grep loki | grep -v grep | awk '{print $1}' | head -n1)
+                  if [ -n "$LOKI_PID" ]; then
+                    echo "Sending SIGTERM to PID $LOKI_PID"
+                    kill -TERM "$LOKI_PID"
+                    sleep 5
+                  fi
                 fi
               done
       volumes:
