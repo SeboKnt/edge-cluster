@@ -23,6 +23,7 @@ spec:
       #    volumeMounts:
       #      - name: data
       #        mountPath: /loki
+      shareProcessNamespace: true
       containers:
         - name: loki
           image: grafana/loki:latest
@@ -31,41 +32,35 @@ spec:
           ports:
             - name: http
               containerPort: 3100
-          ##
-          # check if loki received startup marker yet (duplicate detection)
-          ###
-          livenessProbe:
-            exec:
-              command:
-                - sh
-                - -c
-                - |
-                  END=$(date +%s)000000000
-                  START=$((END - 2592000000000000)) # last 30 days
-                  
-                  RESPONSE=$(curl -sG "http://localhost:3100/loki/api/v1/query_range" \
-                    --data-urlencode 'query={job="startup"}' \
-                    --data-urlencode "start=$START" \
-                    --data-urlencode "end=$END" \
-                    --data-urlencode "limit=10" 2>/dev/null)
-                  
-                  if [ -z "$RESPONSE" ]; then exit 0; fi
-                  
-                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '\["[0-9]*","[^"]*"\]' | wc -l)
-                  
-                  if [ $STARTUP_COUNT -ge 2 ]; then
-                    exit 1
-                  fi
-                  exit 0
-            initialDelaySeconds: 30
-            periodSeconds: 30
-            timeoutSeconds: 10
-            failureThreshold: 3
           volumeMounts:
-            #- name: data
-            #  mountPath: /loki
             - name: config
               mountPath: /etc/loki
+
+        ##
+        # check if loki received startup marker yet (duplicate detection)
+        ###
+        - name: loki-watchdog
+          image: curlimages/curl:8.7.1
+          command:
+            - sh
+            - -c
+          args:
+            - |
+              while true; do
+                sleep 30
+                END=$(date +%s)000000000
+                START=$((END - 2592000000000000)) # last 30 days
+                RESPONSE=$(curl -sG "http://localhost:3100/loki/api/v1/query_range" \
+                  --data-urlencode 'query={job="startup"}' \
+                  --data-urlencode "start=$START" \
+                  --data-urlencode "end=$END" \
+                  --data-urlencode "limit=100" 2>/dev/null || true)
+                COUNT=$(echo "$RESPONSE" | grep -o '\["[0-9]*","[^"]*"\]' | wc -l)
+                if [ "$COUNT" -ge 2 ]; then
+                  echo "Duplicates detected: $COUNT entries. Killing Loki."
+                  pkill -TERM loki || true
+                fi
+              done
       volumes:
         #- name: data
         #  persistentVolumeClaim:

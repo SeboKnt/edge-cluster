@@ -78,9 +78,9 @@ spec:
                     exit 1
                   fi
                   exit 0
-            initialDelaySeconds: 30
+            initialDelaySeconds: 60
             periodSeconds: 15
-            timeoutSeconds: 10
+            timeoutSeconds: 60
             failureThreshold: 3
           volumeMounts:
             - name: alloy-config
