@@ -5,9 +5,15 @@ metadata:
   namespace: owntrack
 data:
   config.alloy: |
+    local.file_match "owntracks" {
+      path_targets = [{
+        __path__ = "/store/rec/user/*/*.rec"
+        job      = "owntracks"
+      }]
+    }
+
     loki.source.file "owntracks" {
-      targets = [{ __path__ = "/store/rec/user/*/*.rec", job = "owntracks" }]
-      positions_path = "/tmp/positions.yaml"
+      targets = local.file_match.owntracks.targets
       forward_to = [loki.write.default.receiver]
     }
 
