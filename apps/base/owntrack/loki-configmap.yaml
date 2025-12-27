@@ -37,6 +37,9 @@ data:
     server:
       http_listen_port: 3100
     
+    compactor:
+      working_directory: /tmp/compactor
+    
     storage_config:
       tsdb_shipper:
         active_index_directory: /loki/tsdb-index
