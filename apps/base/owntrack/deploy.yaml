@@ -41,6 +41,30 @@ spec:
           args:
             - run
             - /etc/alloy/config.alloy
+          ##
+          # check if loki received startup marker yet (duplicate detection)
+          ###
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  RESPONSE=$(curl -sG "http://loki:3100/loki/api/v1/query_range" \
+                    --data-urlencode 'query={job="startup"}' \
+                    --data-urlencode "start=$(( $(date +%s) - 3600 ))000000000" \
+                    --data-urlencode "end=$(date +%s)000000000" \
+                    --data-urlencode "limit=10" 2>/dev/null)
+                  
+                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '"values":\[\[' | wc -l)
+                  if [ $STARTUP_COUNT -eq 0 ]; then
+                    exit 1
+                  fi
+                  exit 0
+            initialDelaySeconds: 20
+            periodSeconds: 15
+            timeoutSeconds: 10
+            failureThreshold: 2
           volumeMounts:
             - name: alloy-config
               mountPath: /etc/alloy/config.alloy

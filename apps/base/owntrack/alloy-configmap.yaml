@@ -22,3 +22,19 @@ data:
         url = "http://loki:3100/loki/api/v1/push"
       }
     }
+
+    ##
+    # Send a startup marker log entry once to verify loki is reachable
+    ###
+    local.exec "startup_marker" {
+      command = "sh -c 'echo startup marker'"
+      when    = flag.bool("flag.startup_marker", false, "Send startup marker once")
+    }
+
+    loki.source.syslog "startup" {
+      listen_address = "127.0.0.1:10514"
+      labels = {
+        job = "startup",
+      }
+      forward_to = [loki.write.default.receiver]
+    }

@@ -16,13 +16,13 @@ spec:
         app: loki
     spec:
       # loki is not allowd to write
-      initContainers:
-        - name: fix-permissions
-          image: busybox:latest
-          command: ['sh', '-c', 'mkdir -p /loki /var/loki && chown -R 10001:10001 /loki /var/loki']
-          volumeMounts:
-            - name: data
-              mountPath: /loki
+      #initContainers:
+      #  - name: fix-permissions
+      #    image: busybox:latest
+      #    command: ['sh', '-c', 'mkdir -p /loki /var/loki && chown -R 10001:10001 /loki /var/loki']
+      #    volumeMounts:
+      #      - name: data
+      #        mountPath: /loki
       containers:
         - name: loki
           image: grafana/loki:latest
@@ -31,15 +31,45 @@ spec:
           ports:
             - name: http
               containerPort: 3100
+          ##
+          # check if loki received startup marker yet (duplicate detection)
+          ###
+          livenessProbe:
+            exec:
+              command:
+                - sh
+                - -c
+                - |
+                  END=$(date +%s)000000000
+                  START=$((END - 3600000000000))
+                  
+                  RESPONSE=$(curl -sG "http://localhost:3100/loki/api/v1/query_range" \
+                    --data-urlencode 'query={job="startup"}' \
+                    --data-urlencode "start=$START" \
+                    --data-urlencode "end=$END" \
+                    --data-urlencode "limit=10" 2>/dev/null)
+                  
+                  if [ -z "$RESPONSE" ]; then exit 0; fi
+                  
+                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '"values":\[\[' | wc -l)
+                  
+                  if [ $STARTUP_COUNT -gt 1 ]; then
+                    exit 1
+                  fi
+                  exit 0
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 10
+            failureThreshold: 1
           volumeMounts:
-            - name: data
-              mountPath: /loki
+            #- name: data
+            #  mountPath: /loki
             - name: config
               mountPath: /etc/loki
       volumes:
-        - name: data
-          persistentVolumeClaim:
-            claimName: loki-data
+        #- name: data
+        #  persistentVolumeClaim:
+        #    claimName: loki-data
         - name: config
           configMap:
             name: loki-config

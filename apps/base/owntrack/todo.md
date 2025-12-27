@@ -1,3 +1,4 @@
 - network policies
 --> owntrack and filesbowser dont allow to send files to WAN
 --> passwd for filesbrowser (not saved only in logs after first boot) 
+--> owntrack password for ingress

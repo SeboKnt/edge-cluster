@@ -11,16 +11,16 @@ spec:
   resources:
     requests:
       storage: 5Gi
----
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: loki-data
-  namespace: owntrack
-spec:
-  accessModes:
-    - ReadWriteOnce
-  storageClassName: longhorn-1replica
-  resources:
-    requests:
-      storage: 10Gi
+#---
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: loki-data
+#  namespace: owntrack
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  storageClassName: longhorn-1replica
+#  resources:
+#    requests:
+#      storage: 10Gi
