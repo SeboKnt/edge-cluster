@@ -52,27 +52,36 @@ spec:
                     curl -X POST "http://loki:3100/loki/api/v1/push" \
                       -H "Content-Type: application/json" \
                       -d "{\"streams\": [{\"stream\": {\"job\": \"startup\", \"container\": \"alloy\"}, \"values\": [[\"$(date +%s)000000000\", \"alloy started\"]]}]}"
+          ##
+          # check if loki received startup marker yet (duplicate detection)
+          ###
           livenessProbe:
             exec:
               command:
                 - sh
                 - -c
                 - |
+                  END=$(date +%s)000000000
+                  START=$((END - 2592000000000000)) # last 30 days
+                  
                   RESPONSE=$(curl -sG "http://loki:3100/loki/api/v1/query_range" \
                     --data-urlencode 'query={job="startup"}' \
-                    --data-urlencode "start=$(( $(date +%s) - 3600 ))000000000" \
-                    --data-urlencode "end=$(date +%s)000000000" \
+                    --data-urlencode "start=$START" \
+                    --data-urlencode "end=$END" \
                     --data-urlencode "limit=10" 2>/dev/null)
                   
-                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '"values":\[\[' | wc -l)
-                  if [ $STARTUP_COUNT -eq 0 ]; then
+                  if [ -z "$RESPONSE" ]; then exit 0; fi
+                  
+                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '\["[0-9]*","[^"]*"\]' | wc -l)
+                  
+                  if [ $STARTUP_COUNT -ge 2 ]; then
                     exit 1
                   fi
                   exit 0
-            initialDelaySeconds: 20
+            initialDelaySeconds: 30
             periodSeconds: 15
             timeoutSeconds: 10
-            failureThreshold: 2
+            failureThreshold: 3
           volumeMounts:
             - name: alloy-config
               mountPath: /etc/alloy/config.alloy

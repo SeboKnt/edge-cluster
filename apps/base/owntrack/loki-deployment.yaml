@@ -41,7 +41,7 @@ spec:
                 - -c
                 - |
                   END=$(date +%s)000000000
-                  START=$((END - 3600000000000))
+                  START=$((END - 2592000000000000)) # last 30 days
                   
                   RESPONSE=$(curl -sG "http://localhost:3100/loki/api/v1/query_range" \
                     --data-urlencode 'query={job="startup"}' \
@@ -51,16 +51,16 @@ spec:
                   
                   if [ -z "$RESPONSE" ]; then exit 0; fi
                   
-                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '"values":\[\[' | wc -l)
+                  STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '\["[0-9]*","[^"]*"\]' | wc -l)
                   
-                  if [ $STARTUP_COUNT -gt 1 ]; then
+                  if [ $STARTUP_COUNT -ge 2 ]; then
                     exit 1
                   fi
                   exit 0
             initialDelaySeconds: 30
             periodSeconds: 30
             timeoutSeconds: 10
-            failureThreshold: 1
+            failureThreshold: 3
           volumeMounts:
             #- name: data
             #  mountPath: /loki
