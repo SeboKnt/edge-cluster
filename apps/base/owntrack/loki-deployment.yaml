@@ -49,6 +49,9 @@ spec:
         ###
         - name: loki-watchdog
           image: curlimages/curl:8.7.1
+          securityContext:
+            runAsUser: 10001
+            runAsGroup: 10001
           command:
             - sh
             - -c
