@@ -6,5 +6,6 @@ resources:
   - service.yaml
   - pvc.yaml
   - promtail-configmap.yaml
+  - loki-configmap.yaml
   - loki-deployment.yaml
   - loki-service.yaml
