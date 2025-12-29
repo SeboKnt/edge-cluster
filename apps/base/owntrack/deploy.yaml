@@ -75,7 +75,7 @@ spec:
                   
                   STARTUP_COUNT=$(echo "$RESPONSE" | grep -o '\["[0-9]*","[^"]*"\]' | wc -l)
                   
-                  if [ $STARTUP_COUNT -ge 2 ]; then
+                  if [ $STARTUP_COUNT -lt 1 ]; then
                     exit 1
                   fi
                   exit 0
