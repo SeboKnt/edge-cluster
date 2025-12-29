@@ -41,17 +41,17 @@ spec:
           args:
             - run
             - /etc/alloy/config.alloy
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - sh
-                  - -c
-                  - |
-                    sleep 5
-                    curl -X POST "http://loki:3100/loki/api/v1/push" \
-                      -H "Content-Type: application/json" \
-                      -d "{\"streams\": [{\"stream\": {\"job\": \"startup\", \"container\": \"alloy\"}, \"values\": [[\"$(date +%s)000000000\", \"alloy started\"]]}]}"
+          #lifecycle:
+          #  postStart:
+          #    exec:
+          #      command:
+          #        - sh
+          #        - -c
+          #        - |
+          #          sleep 5
+          #          curl -X POST "http://loki:3100/loki/api/v1/push" \
+          #            -H "Content-Type: application/json" \
+          #            -d "{\"streams\": [{\"stream\": {\"job\": \"startup\", \"container\": \"alloy\"}, \"values\": [[\"$(date +%s)000000000\", \"alloy started\"]]}]}"
           ##
           # check if loki received startup marker yet (duplicate detection)
           ###
