@@ -35,8 +35,8 @@ spec:
           bucket: velero
           default: true
           config:
-            region: eu-central-1
-            s3Url: http://omv.youngandhungry.org:9000
+            region: us-east-1
+            s3Url: https://192.168.180.19:9000
             insecureSkipTLSVerify: true
             s3ForcePathStyle: true
           credential:
@@ -45,9 +45,8 @@ spec:
       volumeSnapshotLocation:
         - name: omv
           provider: aws
-          default: true
           config:
-            region: eu-central-1
-            s3Url: http://omv.youngandhungry.org:9000
+            region: us-east-1
+            s3Url: https://192.168.180.19:9000
             insecureSkipTLSVerify: true
             s3ForcePathStyle: true
