@@ -23,7 +23,9 @@ spec:
   values:
     kubectl:
       image:
+        repository: bitnami/kubectl
         tag: latest
+        pullPolicy: IfNotPresent
     initContainers:
     - name: velero-plugin-for-aws
       image: velero/velero-plugin-for-aws
