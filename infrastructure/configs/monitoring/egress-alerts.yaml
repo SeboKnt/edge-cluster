@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: egress-anomalies
+  namespace: cattle-monitoring-system
+  labels:
+    release: rancher-monitoring
+spec:
+  groups:
+  - name: network-egress
+    rules:
+    - alert: HighNetworkEgress
+      # Alert if a pod transmits more than 50MB/s over 5 minutes
+      expr: sum by (pod, namespace) (rate(container_network_transmit_bytes_total{namespace!~"kube-system|cattle-monitoring-system"}[5m])) > 52428800
+      for: 5m
+      labels:
+        severity: warning
+      annotations:
+        summary: "Pod {{ $labels.namespace }}/{{ $labels.pod }} shows unusually high network egress."
+        description: "Pod is transmitting data to the network at a rate higher than 50MB/s for more than 5 minutes."

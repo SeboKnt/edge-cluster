@@ -1,0 +1,43 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: openwebui
+  namespace: ai
+spec:
+  interval: 24h
+  url: https://helm.openwebui.com/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: openwebui
+  namespace: ai
+spec:
+  interval: 2h
+  chart:
+    spec:
+      chart: open-webui
+      version: 3.2.3
+      sourceRef:
+        kind: HelmRepository
+        name: openwebui
+        namespace: ai
+      interval: 2h
+  values:
+    ollama:
+      enabled: false
+    extraEnvVars:
+      - name: OLLAMA_BASE_URL
+        value: "http://ollama.ai.svc.cluster.local:11434"
+    ingress:
+      enabled: true
+      className: nginx
+      hosts:
+        - host: chat.home.local
+          paths:
+            - path: /
+              pathType: ImplementationSpecific
+    persistence:
+      enabled: true
+      size: 10Gi
+      storageClass: longhorn

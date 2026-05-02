@@ -1,0 +1,39 @@
+apiVersion: source.toolkit.fluxcd.io/v1beta1
+kind: HelmRepository
+metadata:
+  name: ollama
+  namespace: ai
+spec:
+  interval: 24h
+  url: https://otwld.github.io/ollama-helm/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: ollama
+  namespace: ai
+spec:
+  interval: 2h
+  chart:
+    spec:
+      chart: ollama
+      version: 0.70.2
+      sourceRef:
+        kind: HelmRepository
+        name: ollama
+        namespace: ai
+      interval: 2h
+  values:
+    ollama:
+      gpu:
+        enabled: true
+        type: 'nvidia'
+        number: 1
+      models:
+        - llama3
+    nodeSelector:
+      gpu: "true"
+    persistence:
+      enabled: true
+      size: 50Gi
+      storageClass: longhorn

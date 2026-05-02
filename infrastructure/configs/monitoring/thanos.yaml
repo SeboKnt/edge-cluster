@@ -1,0 +1,11 @@
+# kubectl create secret generic thanos-objstore-config --namespace cattle-monitoring-system --from-file=thanos.yaml=thanos.yaml --dry-run=client -o yaml | kubeseal --format yaml > sealed-thanos-objstore.yaml && rm thanos.yaml
+type: s3
+config:
+  bucket: "thanos-metrics"
+  endpoint: "192.168.180.19:9000"
+  region: "us-east-1"
+  access_key: "DEIN_ACCESS_KEY"
+  secret_key: "DEIN_SECRET_KEY"
+  insecure: false
+  tls_config:
+    insecure_skip_verify: true

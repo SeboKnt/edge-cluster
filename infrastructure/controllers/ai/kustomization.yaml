@@ -1,0 +1,9 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+namespace: ai
+resources:
+  - namespace.yaml
+  - network-policies.yaml
+  - ollama.yaml
+  - openwebui.yaml
+  - github.com/openclaw/openclaw/scripts/k8s/manifests?ref=main

@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1alpha1
+kind: AlertmanagerConfig
+metadata:
+  name: telegram-config
+  namespace: cattle-monitoring-system
+spec:
+  route:
+    groupBy: ['alertname', 'job']
+    groupWait: 30s
+    groupInterval: 5m
+    repeatInterval: 12h
+    receiver: 'telegram'
+  receivers:
+    - name: 'telegram'
+      telegramConfigs:
+        - botToken:
+            name: monitoring-telegram-secret
+            key: token
+          chatId: 123456789 # TODO: Replace with your Telegram Chat ID
+          sendResolved: true
+          message: |-
+            {{ template "telegram.default.message" . }}

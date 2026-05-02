@@ -33,25 +33,11 @@ spec:
       volumeMounts:
       - mountPath: /target
         name: plugins
+    - name: velero-plugin-for-csi
+      image: velero/velero-plugin-for-csi:v0.7.1
+      imagePullPolicy: IfNotPresent
+      volumeMounts:
+      - mountPath: /target
+        name: plugins
     configuration:
-      backupStorageLocation:
-        - name: omv
-          provider: aws
-          bucket: velero
-          default: true
-          config:
-            region: us-east-1
-            s3Url: https://192.168.180.19:9000
-            insecureSkipTLSVerify: true
-            s3ForcePathStyle: true
-          credential:
-            name: minio-s3-credentials
-            key: cloud
-      volumeSnapshotLocation:
-        - name: omv
-          provider: aws
-          config:
-            region: us-east-1
-            s3Url: https://192.168.180.19:9000
-            insecureSkipTLSVerify: true
-            s3ForcePathStyle: true
+      features: EnableCSI

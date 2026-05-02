@@ -56,6 +56,10 @@ spec:
         modules:
           - name: rook
             enabled: true
+          - name: pg_autoscaler
+            enabled: true
+          - name: balancer
+            enabled: true
       dashboard:
         enabled: true
         port: 7000
@@ -66,18 +70,15 @@ spec:
         useAllDevices: true
         config:
           osdsPerDevice: "1"
-      #configOverride: |
-      #  [global]
-      #  mon_allow_pool_delete = true
-      #  osd_pool_default_size = 1
-      #  osd_pool_default_min_size = 1
+      configOverride: |
+        [global]
+        osd_pool_default_size = 1
+        osd_pool_default_min_size = 1
+        [mgr]
+        mgr/balancer/active = true
+        mgr/balancer/mode = upmap
       resources:
         mgr:
-          modules:
-            - name: pg_autoscaler
-              enabled: true
-            - name: balancer
-              enabled: true
           limits:
             memory: "1Gi"
           requests:

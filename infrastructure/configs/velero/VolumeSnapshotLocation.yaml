@@ -1,2 +1,12 @@
----
-# invalid
+apiVersion: velero.io/v1
+kind: VolumeSnapshotLocation
+metadata:
+  name: omv
+  namespace: velero
+spec:
+  provider: aws
+  config:
+    region: us-east-1
+    s3Url: https://192.168.180.19:9000
+    insecureSkipTLSVerify: "true"
+    s3ForcePathStyle: "true"
