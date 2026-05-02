@@ -29,7 +29,7 @@ spec:
     disableWait: true
   values:
     driver:
-      kind: modern_bpf
+      kind: modern_ebpf
     tty: true
     falcosidekick:
       enabled: true
