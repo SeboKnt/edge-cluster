@@ -4,4 +4,5 @@ resources:
   - ./ingress
   - ./nextcloud
   - ./owntrack
+  - ./ai
   #- ../base/homeassistant
