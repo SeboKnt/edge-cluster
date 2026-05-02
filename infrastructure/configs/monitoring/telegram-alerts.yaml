@@ -16,7 +16,7 @@ spec:
         - botToken:
             name: monitoring-telegram-secret
             key: token
-          chatId: 123456789 # TODO: Replace with your Telegram Chat ID
+          chatID: 123456789 # TODO: Replace with your Telegram Chat ID
           sendResolved: true
           message: |-
             {{ template "telegram.default.message" . }}
