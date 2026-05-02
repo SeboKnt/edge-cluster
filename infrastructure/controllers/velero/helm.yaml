@@ -41,3 +41,5 @@ spec:
         name: plugins
     configuration:
       features: EnableCSI
+      backupStorageLocation: []
+      volumeSnapshotLocation: []

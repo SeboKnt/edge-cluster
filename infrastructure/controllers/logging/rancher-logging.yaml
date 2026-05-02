@@ -22,7 +22,10 @@ spec:
         kind: HelmRepository
         name: rancher-charts
         namespace: cattle-logging-system
-      interval: 2h
+  install:
+    disableWait: true
+  upgrade:
+    disableWait: true
   values:
     additionalLoggingSources:
       rke2:

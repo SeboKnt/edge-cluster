@@ -23,9 +23,13 @@ spec:
         name: falcosecurity
         namespace: security
       interval: 2h
+  install:
+    disableWait: true
+  upgrade:
+    disableWait: true
   values:
     driver:
-      kind: ebpf
+      kind: modern_bpf
     tty: true
     falcosidekick:
       enabled: true
