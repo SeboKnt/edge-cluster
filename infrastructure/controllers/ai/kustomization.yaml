@@ -3,6 +3,7 @@ kind: Kustomization
 namespace: ai
 resources:
   - namespace.yaml
+  - openclaw-secrets.yaml
   - network-policies.yaml
   - ollama.yaml
   - openwebui.yaml
