@@ -12,8 +12,12 @@ spec:
       sourceRef:
         kind: GitRepository
         name: rancher-charts
-        namespace: flux-system
+        namespace: cattle-monitoring-system
       interval: 24h
+  install:
+    disableWait: true
+  upgrade:
+    disableWait: true
   values:
     grafana:
       enabled: true
