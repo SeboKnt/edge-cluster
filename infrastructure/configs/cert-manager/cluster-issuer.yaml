@@ -16,7 +16,7 @@ spec:
           solverName: hetzner
           config:
               secretName: hetzner-secret
-              apiUrl: https://dns.hetzner.com/api/v1
+              apiUrl: https://api.hetzner.cloud/v1
 ---
 apiVersion: cert-manager.io/v1
 kind: ClusterIssuer
@@ -35,7 +35,7 @@ spec:
           solverName: hetzner
           config:
               secretName: hetzner-secret
-              apiUrl: https://dns.hetzner.com/api/v1
+              apiUrl: https://api.hetzner.cloud/v1
 ---
 apiVersion: bitnami.com/v1alpha1
 kind: SealedSecret
