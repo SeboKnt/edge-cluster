@@ -11,5 +11,5 @@ resources:
   - ./nginx-ingress
   - ./rook
   - ./sealed-secret
-  - ./security
+  #- ./security
   - ./velero
