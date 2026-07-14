@@ -60,6 +60,7 @@ spec:
         enabled: false       
       prometheusSpec:
         retention: 30d
+        retentionSize: 40GiB
         storageSpec:
           volumeClaimTemplate:
             spec:
