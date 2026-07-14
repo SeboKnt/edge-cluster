@@ -5,4 +5,4 @@ resources:
   - repo.yaml
   - rancher-crd.yaml
   - rancher-monitoring.yaml
-  - thanos.yaml
+#  - thanos.yaml

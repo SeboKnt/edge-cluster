@@ -26,12 +26,12 @@ spec:
           enabled: false
         auth.basic:
           enabled: true
-      adminUser: null
-      adminPassword: null
-      admin:
-        existingSecret: "rancher-monitoring-grafana"
-        userKey: admin-user
-        passwordKey: admin-password
+      adminUser: admin
+      adminPassword: prom-operator
+      #admin:
+      #  existingSecret: "rancher-monitoring-grafana"
+      #  userKey: admin-user
+      #  passwordKey: admin-password
       #persistence:
       #  enabled: true
       #  storageClassName: longhorn
@@ -55,9 +55,9 @@ spec:
     prometheus:
       enabled: true
       thanosService:
-        enabled: true
+        enabled: false
       thanosServiceMonitor:
-        enabled: true       
+        enabled: false       
       prometheusSpec:
         retention: 30d
         storageSpec:
@@ -68,11 +68,11 @@ spec:
               resources:
                 requests:
                   storage: 30Gi
-        thanos:
-          objectStorageConfig:
-            existingSecret:
-              name: "thanos-objstore-config"
-              key: "thanos.yaml"
+        #thanos:
+        #  objectStorageConfig:
+        #    existingSecret:
+        #      name: "thanos-objstore-config"
+        #      key: "thanos.yaml"
     #thanosRuler:
     #  enabled: true
     #  serviceMonitor:
