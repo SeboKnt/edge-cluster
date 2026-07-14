@@ -98,4 +98,4 @@ spec:
     alertmanager:
       enabled: true
       alertmanagerSpec: 
-        configSecret: alertmanager-main
+        configSecret: alertmanager-rancher-monitoring-alertmanager
