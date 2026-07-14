@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: grafana
+  namespace: cattle-monitoring-system
+spec:
+  rules:
+  - host: grafana.edge.youngandhungry.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rancher-monitoring-grafana
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - grafana.edge.youngandhungry.org
+    secretName: grafana-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: grafana-tls
+  namespace: nextcloud
+spec:
+  secretName: grafana-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: grafana.edge.youngandhungry.org
+  dnsNames:
+  - grafana.edge.youngandhungry.org
