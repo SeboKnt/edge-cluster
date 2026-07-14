@@ -34,3 +34,39 @@ spec:
   commonName: grafana.edge.youngandhungry.org
   dnsNames:
   - grafana.edge.youngandhungry.org
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: alertmanager
+  namespace: cattle-monitoring-system
+spec:
+  rules:
+  - host: alertmanager.edge.youngandhungry.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: rancher-monitoring-alertmanager
+            port:
+              number: 9093
+  tls:
+  - hosts:
+    - alertmanager.edge.youngandhungry.org
+    secretName: alertmanager-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: alertmanager-tls
+  namespace: cattle-monitoring-system
+spec:
+  secretName: alertmanager-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: alertmanager.edge.youngandhungry.org
+  dnsNames:
+  - alertmanager.edge.youngandhungry.org
