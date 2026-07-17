@@ -59,8 +59,8 @@ spec:
       thanosServiceMonitor:
         enabled: false       
       prometheusSpec:
-        retention: 30d
-        retentionSize: 40GiB
+        retention: 14d
+        retentionSize: 15GiB
         storageSpec:
           volumeClaimTemplate:
             spec:
@@ -68,7 +68,7 @@ spec:
               accessModes: ["ReadWriteOnce"]
               resources:
                 requests:
-                  storage: 50Gi
+                  storage: 20Gi
         #thanos:
         #  objectStorageConfig:
         #    existingSecret:
