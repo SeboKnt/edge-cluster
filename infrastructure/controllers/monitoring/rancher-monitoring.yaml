@@ -61,6 +61,13 @@ spec:
       prometheusSpec:
         retention: 14d
         retentionSize: 15GiB
+        resources:
+          limits:
+            cpu: 2000m
+            memory: 4500Mi
+          requests:
+            cpu: 750m
+            memory: 1500Mi
         storageSpec:
           volumeClaimTemplate:
             spec:
