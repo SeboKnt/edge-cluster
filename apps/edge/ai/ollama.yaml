@@ -24,6 +24,7 @@ spec:
         namespace: ai
       interval: 2h
   values:
+    runtimeClassName: nvidia
     ollama:
       gpu:
         enabled: true
