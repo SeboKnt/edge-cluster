@@ -7,4 +7,4 @@ resources:
   - network-policies.yaml
   - ollama.yaml
   - openwebui.yaml
-  - github.com/openclaw/openclaw/scripts/k8s/manifests?ref=main
+  - ./openclaw

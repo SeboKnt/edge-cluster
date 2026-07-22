@@ -9,6 +9,7 @@ resources:
   - ./longhorn
   - ./monitoring
   - ./nginx-ingress
+  - ./nvidia-device-plugin
   - ./rook
   - ./sealed-secret
   #- ./security
