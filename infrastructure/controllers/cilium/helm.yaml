@@ -32,6 +32,8 @@ spec:
     # Enable Hubble for traffic observation
     hubble:
       enabled: true
+      relay:
+        enabled: true
       metrics:
         enabled:
           - dns
