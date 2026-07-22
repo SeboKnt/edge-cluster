@@ -28,4 +28,4 @@ spec:
     nodeSelector:
       kubernetes.io/hostname: k3s03
     affinity:
-      nodeAffinity: {}
+      nodeAffinity: null
