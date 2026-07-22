@@ -33,7 +33,7 @@ spec:
         pull:
           - llama3
     nodeSelector:
-      kubernetes.io/hostname: k3s01
+      kubernetes.io/hostname: k3s03
     persistence:
       enabled: true
       size: 15Gi
