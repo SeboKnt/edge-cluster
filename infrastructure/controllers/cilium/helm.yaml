@@ -1,0 +1,44 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  interval: 24h
+  url: https://helm.cilium.io/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: cilium
+      version: "1.19.6"
+      sourceRef:
+        kind: HelmRepository
+        name: cilium
+        namespace: kube-system
+      interval: 12h
+  values:
+    # Match the default K3s Pod CIDR allocation
+    ipam:
+      operator:
+        clusterPoolIPv4PodCIDRList: ["10.42.0.0/16"]
+    
+    # Enable Hubble for traffic observation
+    hubble:
+      enabled: true
+      metrics:
+        enabled:
+          - dns
+          - httpV2:initiator,responder
+          - tcp
+          - icmp
+          - flow
+      # Enable Hubble UI (Web Interface)
+      ui:
+        enabled: true

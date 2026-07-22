@@ -9,3 +9,4 @@ resources:
   - ./rook-dashboard.yaml
   - ./openwebui.yaml
   - ./openclaw.yaml
+  - ./hubble.yaml
