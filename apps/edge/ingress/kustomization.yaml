@@ -7,3 +7,5 @@ resources:
   - ./owntrack.yaml
   - ./owntrack-files.yaml
   - ./rook-dashboard.yaml
+  - ./openwebui.yaml
+  - ./openclaw.yaml

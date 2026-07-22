@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openclaw
+  namespace: ai
+spec:
+  rules:
+  - host: openclaw.edge.youngandhungry.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: openclaw
+            port:
+              number: 18789
+  tls:
+  - hosts:
+    - openclaw.edge.youngandhungry.org
+    secretName: openclaw-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: openclaw-tls
+  namespace: ai
+spec:
+  secretName: openclaw-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: openclaw.edge.youngandhungry.org
+  dnsNames:
+  - openclaw.edge.youngandhungry.org

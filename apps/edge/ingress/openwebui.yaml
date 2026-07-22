@@ -1,0 +1,36 @@
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: openwebui
+  namespace: ai
+spec:
+  rules:
+  - host: openwebui.edge.youngandhungry.org
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: openwebui-open-webui
+            port:
+              number: 80
+  tls:
+  - hosts:
+    - openwebui.edge.youngandhungry.org
+    secretName: openwebui-tls
+---
+apiVersion: cert-manager.io/v1
+kind: Certificate
+metadata:
+  name: openwebui-tls
+  namespace: ai
+spec:
+  secretName: openwebui-tls
+  issuerRef:
+    kind: ClusterIssuer
+    name: letsencrypt
+  commonName: openwebui.edge.youngandhungry.org
+  dnsNames:
+  - openwebui.edge.youngandhungry.org
