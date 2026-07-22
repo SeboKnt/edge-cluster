@@ -15,7 +15,10 @@ data:
           "mode": "token"
         },
         "controlUi": {
-          "enabled": true
+          "enabled": true,
+          "allowedOrigins": [
+            "https://openclaw.edge.youngandhungry.org"
+          ]
         }
       },
       "agents": {
