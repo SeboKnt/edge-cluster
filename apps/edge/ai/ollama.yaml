@@ -1,4 +1,4 @@
-apiVersion: source.toolkit.fluxcd.io/v1beta1
+apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
   name: ollama
@@ -7,7 +7,7 @@ spec:
   interval: 24h
   url: https://otwld.github.io/ollama-helm/
 ---
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: ollama
@@ -35,5 +35,5 @@ spec:
       gpu: "true"
     persistence:
       enabled: true
-      size: 50Gi
+      size: 15Gi
       storageClass: longhorn
