@@ -28,6 +28,11 @@ spec:
       operator:
         clusterPoolIPv4PodCIDRList: ["10.42.0.0/16"]
     
+    ingressController:
+      enabled: true
+      loadbalancerMode: shared
+      default: true
+
     hubble:
       enabled: true
       relay:
