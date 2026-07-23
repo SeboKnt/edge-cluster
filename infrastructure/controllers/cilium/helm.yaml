@@ -24,12 +24,10 @@ spec:
         namespace: kube-system
       interval: 12h
   values:
-    # Match the default K3s Pod CIDR allocation
     ipam:
       operator:
         clusterPoolIPv4PodCIDRList: ["10.42.0.0/16"]
     
-    # Enable Hubble for traffic observation
     hubble:
       enabled: true
       relay:
@@ -41,6 +39,6 @@ spec:
           - tcp
           - icmp
           - flow
-      # Enable Hubble UI (Web Interface)
+      # Enable Hubble UI
       ui:
         enabled: true
