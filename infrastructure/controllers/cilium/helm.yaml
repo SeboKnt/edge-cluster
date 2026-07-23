@@ -24,6 +24,7 @@ spec:
         namespace: kube-system
       interval: 12h
   values:
+    kubeProxyReplacement: true
     ipam:
       operator:
         clusterPoolIPv4PodCIDRList: ["10.42.0.0/16"]
