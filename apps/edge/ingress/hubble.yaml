@@ -1,36 +1,16 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: hubble-ui
   namespace: kube-system
 spec:
+  parentRefs:
+  - name: shared-gateway
+    namespace: kube-system
+  hostnames:
+  - "hubble.edge.youngandhungry.org"
   rules:
-  - host: hubble.edge.youngandhungry.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: hubble-ui
-            port:
-              number: 80
-  tls:
-  - hosts:
-    - hubble.edge.youngandhungry.org
-    secretName: hubble-tls
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: hubble-tls
-  namespace: kube-system
-spec:
-  secretName: hubble-tls
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt
-  commonName: hubble.edge.youngandhungry.org
-  dnsNames:
-  - hubble.edge.youngandhungry.org
+  - backendRefs:
+    - name: hubble-ui
+      port: 80

@@ -1,36 +1,16 @@
 ---
-apiVersion: networking.k8s.io/v1
-kind: Ingress
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
 metadata:
   name: owntrack-files
   namespace: owntrack
 spec:
+  parentRefs:
+  - name: shared-gateway
+    namespace: kube-system
+  hostnames:
+  - "owntrack-files.edge.youngandhungry.org"
   rules:
-  - host: owntrack-files.edge.youngandhungry.org
-    http:
-      paths:
-      - path: /
-        pathType: Prefix
-        backend:
-          service:
-            name: owntrack
-            port:
-              number: 8080
-  tls:
-  - hosts:
-    - owntrack-files.edge.youngandhungry.org
-    secretName: owntrack-files-tls
----
-apiVersion: cert-manager.io/v1
-kind: Certificate
-metadata:
-  name: owntrack-files-tls
-  namespace: owntrack
-spec:
-  secretName: owntrack-files-tls
-  issuerRef:
-    kind: ClusterIssuer
-    name: letsencrypt
-  commonName: owntrack-files.edge.youngandhungry.org
-  dnsNames:
-  - owntrack-files.edge.youngandhungry.org
+  - backendRefs:
+    - name: owntrack
+      port: 8080
