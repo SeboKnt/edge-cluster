@@ -4,9 +4,13 @@ metadata:
   name: nextcloud-db
   namespace: nextcloud
 spec:
+  inheritedMetadata:
+    labels:
+      recurring-job.longhorn.io/daily-backup: enabled
   instances: 1
   storage:
     size: 8Gi
+    storageClass: longhorn
   bootstrap:
     initdb:
       database: nextcloud

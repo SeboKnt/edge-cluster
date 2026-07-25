@@ -3,3 +3,5 @@ kind: Kustomization
 resources:
   - storageclass-1replica.yaml
   - settings.yaml
+  - volumesnapshotclass.yaml
+  - s3-sealed-secret.yaml
