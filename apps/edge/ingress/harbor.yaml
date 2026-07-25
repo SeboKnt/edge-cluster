@@ -1,0 +1,16 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: harbor
+  namespace: harbor
+spec:
+  parentRefs:
+  - name: shared-gateway
+    namespace: kube-system
+  hostnames:
+  - "registry.edge.youngandhungry.org"
+  rules:
+  - backendRefs:
+    - name: harbor
+      port: 80

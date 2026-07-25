@@ -1,0 +1,30 @@
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: harbor-db
+  namespace: harbor
+spec:
+  instances: 2
+  storage:
+    size: 10Gi
+    storageClass: longhorn
+  bootstrap:
+    initdb:
+      database: registry
+      owner: harbor
+      secret:
+        name: harbor-db-secret
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: harbor-db-secret
+  namespace: harbor
+spec:
+  encryptedData:
+    password: AgBww7QKeHfOayN9TbOGemSiInoxgMQO2zE1CoC1xvHoCOBCgbsh7wRG+Rp6kKF5+XXnjRwaA+angluIwwelkokClbtXgql0No+pCUTtfHMjvVxO1Oi5vyrIYdP+n2Yyvrm0YSMEdFEaYyofvM0pm+EmrpTot+/j+7JbTSf7tB1/eYXIwjJsJUTx0OX3RO2jiGkcIs+gD8hFPgZt3F9jOkjOelvS6zy1KEIBDrwfoP9DD6IJblT0LvpkLdQ3UemUWU6ZJ74DzxqSCzNr/YNiGeS0FEZwmWdOGuuatqw9YK0k12VNt/A+UVsF+4Gr3h5ICAtAqW/IAI81B/vx9KscqRFfTOCfMdR7AZqiLUftCsZchnKq2X9690TmPUnaNH2gIDn2+oHTKivwj96cCov9k5x6mz+h5pTQKusp3Y+7co6VEmGiqoNt+jjOwwx/7Uzyx3kcOi/eanCb03tv7wr9zwMHCpfC4AQZjcTJOYfvxOOxeGac70onXBjpXi3jNZaX6z8NySi3QhZvtuRg+94YwsgyCKbvmDVUWsc8htRDSztJP04u+QEHvaM2n1aPyXuAsBFzx9Zg4vLJlJ5HPN4vHWPhDZWnssmDTVYK78VH1gVW96E8wMR0ZJpAKU+iYeH4vEdAziujT1H1VFZGn49WllPmU3V7htgVtGmWAJWiL46PBBb3IHN97i+QOwNUbh1xcHZ26cyvAjU0CuSsIvEgZypyN0sMF/CXul8=
+    username: AgCA85mKomYYVaWranKKPY77emJBkkQOQ+BGYWPr7VgCRwTgguxa+kFpwmZiT5BoyQ4/wN3DfYkZaJVfTD+206TlYHtk1pm81Jf2PlE6jue4UV5IOmrjyPFUKH3/6uWbnfmVe8/6dxfuSNRZjwjeKagoaIcraBG276JirhPjgImo23aSz94P1tlbdY3AQb8IW7Iz996e7goBb25GmN+QavEMSckIXNMMQywjxkuvsg0pyBJrwP0bltqaHrzSSQv+PY8/2FFksnLV8FyoAMwhaSrJJMZWUXIsuoKriIQrwNb1ybdIG4DKvFfEGz04XH2CgxEjXIT6W/47gESQYhAjrZBz00W56fyjlM0O69rx5+dj6G+HoUhh3nXfFIw6adddA89euW8VpCMnxJp79GZyNDGuzgMymKmqFZgWK4l+SpZFD/nYcgUVIzNlclORM7jWTJRq+V8xCSAeJmTyAwjOKILH4XV6Qc8sDD1YmIfUjDAqU/NavJI1/VTqrbSCEGynqvpxyrmHYxquKB51O5mGS5XmQXshcPScD9sUS5rD4OFOsHYzcRiv41g7PcIsKbPZoyd3pN02WT2Ws7MkokvkHvi9jXqzLxd6OUFJGlR+3AxST2LeKmrf7X0XkehrUjQf2gqmz7amPiAYztGbATC8P+cWSNUOJyUH1VIGEaPrUCV2H103EN/tZKWycb/tDG6MyE0QQUSCVpE=
+  template:
+    metadata:
+      name: harbor-db-secret
+      namespace: harbor

@@ -12,3 +12,4 @@ resources:
   - ./hubble.yaml
   - ./longhorn.yaml
   - ./keycloak.yaml
+  - ./harbor.yaml
