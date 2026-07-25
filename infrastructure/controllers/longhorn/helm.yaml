@@ -25,3 +25,6 @@ spec:
         namespace: longhorn-system
       interval: 12h
   values:
+    metrics:
+      serviceMonitor:
+        enabled: true

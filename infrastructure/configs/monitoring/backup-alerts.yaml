@@ -1,0 +1,27 @@
+apiVersion: monitoring.coreos.com/v1
+kind: PrometheusRule
+metadata:
+  name: backup-alerts
+  namespace: cattle-monitoring-system
+  labels:
+    release: rancher-monitoring
+spec:
+  groups:
+  - name: backup-alerts
+    rules:
+    - alert: VeleroBackupFailed
+      expr: increase(velero_backup_failure_total[1h]) > 0
+      for: 5m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Velero Backup fehlgeschlagen"
+        description: "Ein oder mehrere Velero Backups sind in der letzten Stunde fehlgeschlagen."
+    - alert: LonghornBackupFailed
+      expr: longhorn_volume_last_backup_state == 0
+      for: 15m
+      labels:
+        severity: critical
+      annotations:
+        summary: "Longhorn Backup fehlgeschlagen"
+        description: "Das letzte Backup für das Volume {{ $labels.volume }} ist fehlgeschlagen."

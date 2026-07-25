@@ -4,4 +4,5 @@ resources:
   - egress-alerts.yaml
   - ingress.yaml
   - sealed-alertmanager-config.yaml
+  - backup-alerts.yaml
 #  - sealed-thanos-objstore.yaml

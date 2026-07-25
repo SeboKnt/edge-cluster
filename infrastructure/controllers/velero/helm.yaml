@@ -37,3 +37,7 @@ spec:
       features: EnableCSI
       backupStorageLocation: []
       volumeSnapshotLocation: []
+    metrics:
+      enabled: true
+      serviceMonitor:
+        enabled: true
