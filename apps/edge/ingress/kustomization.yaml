@@ -10,3 +10,4 @@ resources:
   - ./openwebui.yaml
   - ./openclaw.yaml
   - ./hubble.yaml
+  - ./longhorn.yaml
