@@ -5,7 +5,7 @@ metadata:
   name: homeassistant-pvc
   namespace: homeassistant
 spec:
-  storageClassName: local-path
+  storageClassName: longhorn-1replica
   accessModes:
     - ReadWriteOnce
   resources:
