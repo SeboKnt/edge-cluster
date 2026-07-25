@@ -2,6 +2,7 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 resources:
   - ./cilium
+  - ./envoy-gateway
   - ./gateway
   - ./capacitor
   - ./cert-manager
@@ -16,3 +17,4 @@ resources:
   - ./sealed-secret
   #- ./security
   - ./velero
+  - ./keycloak

@@ -1,0 +1,40 @@
+---
+apiVersion: source.toolkit.fluxcd.io/v1beta2
+kind: HelmRepository
+metadata:
+  name: bitnami
+  namespace: keycloak
+spec:
+  interval: 24h
+  url: oci://registry-1.docker.io/bitnamicharts
+---
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: keycloak
+  namespace: keycloak
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: keycloak
+      version: 21.4.0
+      sourceRef:
+        kind: HelmRepository
+        name: bitnami
+        namespace: keycloak
+      interval: 12h
+  values:
+    auth:
+      adminUser: admin
+      adminPassword: "changeme"
+    postgresql:
+      enabled: false
+    externalDatabase:
+      host: keycloak-db-rw.keycloak.svc.cluster.local
+      user: app
+      database: app
+      password: ""
+      existingSecret: "keycloak-db-app"
+      existingSecretPasswordKey: "password"
+    proxy: edge
