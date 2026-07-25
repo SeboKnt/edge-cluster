@@ -4,6 +4,9 @@ metadata:
   name: keycloak-db
   namespace: keycloak
 spec:
+  inheritedMetadata:
+    labels:
+      recurring-job.longhorn.io/daily-backup: enabled
   instances: 2
   storage:
     size: 10Gi
