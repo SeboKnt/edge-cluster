@@ -6,5 +6,3 @@ resources:
   - ./longhorn
   - ./monitoring
   - ./velero
-  - ./keycloak
-  - ./harbor
