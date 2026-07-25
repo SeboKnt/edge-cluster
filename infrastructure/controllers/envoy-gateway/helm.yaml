@@ -25,7 +25,6 @@ spec:
     kind: OCIRepository
     name: gateway-helm
   upgrade:
-    strategy:
-      name: RetryOnFailure
-      retryInterval: 5m
+    remediation:
+      retries: 3
   values: {}
