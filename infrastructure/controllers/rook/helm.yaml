@@ -24,6 +24,8 @@ spec:
         namespace: rook-ceph
       interval: 12h
   values:
+    csi:
+      installCsiOperator: false
     crds:
       enabled: true
   install:
