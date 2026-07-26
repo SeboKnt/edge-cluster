@@ -25,6 +25,8 @@ spec:
         namespace: keycloak
       interval: 12h
   values:
+    image:
+      registry: public.ecr.aws
     auth:
       adminUser: admin
       adminPassword: "changeme"
