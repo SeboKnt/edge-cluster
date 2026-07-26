@@ -1,4 +1,3 @@
----
 apiVersion: helm.toolkit.fluxcd.io/v2beta1
 kind: HelmRelease
 metadata:
@@ -17,9 +16,11 @@ spec:
   install:
     remediation:
       retries: 3
+    crds: CreateReplace
   upgrade:
     remediation:
       retries: 3
+    crds: CreateReplace
   values:
     kubectl:
       image:

@@ -28,7 +28,6 @@ spec:
     ipam:
       operator:
         clusterPoolIPv4PodCIDRList: ["10.42.0.0/16"]
-    
     gatewayAPI:
       enabled: true
 
@@ -38,10 +37,14 @@ spec:
         enabled: true
       metrics:
         enabled:
-          - dns
-          - httpV2:initiator,responder
-          - tcp
-          - icmp
-          - flow
+        - dns
+        - httpV2:initiator,responder
+        - tcp
+        - icmp
+        - flow
       ui:
         enabled: true
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace

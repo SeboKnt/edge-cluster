@@ -8,8 +8,6 @@ resources:
   - https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.2.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotclasses.yaml
   - https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.2.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshotcontents.yaml
   - https://raw.githubusercontent.com/kubernetes-csi/external-snapshotter/v8.2.1/client/config/crd/snapshot.storage.k8s.io_volumesnapshots.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.17.0/deploy/examples/crds.yaml
-  - https://raw.githubusercontent.com/rook/rook/v1.17.0/deploy/examples/csi-operator.yaml
 
 images:
   - name: gcr.io/kubebuilder/kube-rbac-proxy

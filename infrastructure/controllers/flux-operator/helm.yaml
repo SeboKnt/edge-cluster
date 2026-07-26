@@ -16,5 +16,7 @@ spec:
       interval: 2h
   install:
     disableWait: true
+    crds: CreateReplace
   upgrade:
     disableWait: true
+    crds: CreateReplace

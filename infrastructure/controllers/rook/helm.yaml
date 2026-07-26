@@ -1,4 +1,3 @@
----
 apiVersion: source.toolkit.fluxcd.io/v1
 kind: HelmRepository
 metadata:
@@ -18,13 +17,19 @@ spec:
   chart:
     spec:
       chart: rook-ceph
-      version: "v1.17.0"
+      version: "v1.20.2"
       sourceRef:
         kind: HelmRepository
         name: rook-release
         namespace: rook-ceph
       interval: 12h
   values:
+    crds:
+      enabled: true
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
 ---
 apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
@@ -36,7 +41,7 @@ spec:
   chart:
     spec:
       chart: rook-ceph-cluster
-      version: "v1.17.0"
+      version: "v1.20.2"
       sourceRef:
         kind: HelmRepository
         name: rook-release
@@ -54,12 +59,12 @@ spec:
         count: 2
         allowMultiplePerNode: true
         modules:
-          - name: rook
-            enabled: true
-          - name: pg_autoscaler
-            enabled: true
-          - name: balancer
-            enabled: true
+        - name: rook
+          enabled: true
+        - name: pg_autoscaler
+          enabled: true
+        - name: balancer
+          enabled: true
       dashboard:
         enabled: true
         port: 7000
@@ -98,64 +103,68 @@ spec:
             memory: "1Gi"
 
     cephBlockPools:
-      - name: ceph-blockpool
+    - name: ceph-blockpool
         # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
-        spec:
+      spec:
+        failureDomain: host
+        replicated:
+          size: 1
+      storageClass:
+        enabled: true
+        name: ceph-block
+
+    cephFileSystems:
+    - name: ceph-filesystem
+      spec:
+        metadataServer:
+          activeCount: 1
+          activeStandby: false
+          resources:
+            limits:
+              cpu: "1"
+              memory: "2Gi"
+            requests:
+              cpu: "300m"
+              memory: "1Gi"
+        metadataPool:
           failureDomain: host
           replicated:
             size: 1
-        storageClass:
-          enabled: true
-          name: ceph-block
-
-    cephFileSystems:
-      - name: ceph-filesystem
-        spec:
-          metadataServer:
-            activeCount: 1
-            activeStandby: false
-            resources:
-              limits:
-                cpu: "1"
-                memory: "2Gi"
-              requests:
-                cpu: "300m"
-                memory: "1Gi"
-          metadataPool:
-            failureDomain: host
-            replicated:
-              size: 1
-          dataPools:
-            - failureDomain: host
-              replicated:
-                size: 1
-        storageClass:
-          enabled: true
-          isDefault: false
-          name: ceph-filesystem
+        dataPools:
+        - failureDomain: host
+          replicated:
+            size: 1
+      storageClass:
+        enabled: true
+        isDefault: false
+        name: ceph-filesystem
 
     cephObjectStores:
-      - name: ceph-objectstore
-        spec:
-          metadataPool:
-            failureDomain: host
-            replicated:
-              size: 1
-          dataPool:
-            failureDomain: host
-            replicated:
-              size: 1
-          preservePoolsOnDelete: true
-          gateway:
-            port: 8080
-            resources:
-              limits:
-                memory: "2Gi"
-              requests:
-                cpu: "300m"
-                memory: "1Gi"
-            instances: 1
-            priorityClassName: system-cluster-critical
-        storageClass:
-          enabled: true
-          name: ceph-bucket
+    - name: ceph-objectstore
+      spec:
+        metadataPool:
+          failureDomain: host
+          replicated:
+            size: 1
+        dataPool:
+          failureDomain: host
+          replicated:
+            size: 1
+        preservePoolsOnDelete: true
+        gateway:
+          port: 8080
+          resources:
+            limits:
+              memory: "2Gi"
+            requests:
+              cpu: "300m"
+              memory: "1Gi"
+          instances: 1
+          priorityClassName: system-cluster-critical
+      storageClass:
+        enabled: true
+        name: ceph-bucket
+  install:
+    crds: CreateReplace
+  upgrade:
+    crds: CreateReplace
