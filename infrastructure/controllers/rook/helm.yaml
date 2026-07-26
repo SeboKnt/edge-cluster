@@ -24,6 +24,11 @@ spec:
         namespace: rook-ceph
       interval: 12h
   values:
+    ceph-csi-operator:
+      controllerManager:
+        manager:
+          env:
+            WATCH_NAMESPACE: "rook-ceph"
     csi:
       installCsiOperator: true
     crds:
@@ -115,6 +120,8 @@ spec:
       storageClass:
         enabled: true
         name: ceph-block
+
+
 
     cephFileSystems:
     - name: ceph-filesystem
