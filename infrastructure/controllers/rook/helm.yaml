@@ -13,7 +13,7 @@ metadata:
   name: rook-ceph
   namespace: rook-ceph
 spec:
-  interval: 30m
+  interval: 31m
   chart:
     spec:
       chart: rook-ceph
@@ -51,6 +51,7 @@ spec:
     operatorNamespace: rook-ceph
     toolbox:
       enabled: true
+    clusterName: rook-ceph
     cephClusterSpec:
       mon:
         count: 3
