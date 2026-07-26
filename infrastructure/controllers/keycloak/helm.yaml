@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: keycloak
-      version: 21.4.0
+      version: 25.2.0
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -37,7 +37,7 @@ spec:
       password: ""
       existingSecret: "keycloak-db-app"
       existingSecretPasswordKey: "password"
-    proxy: edge
+    proxyHeaders: xforwarded
   install:
     crds: CreateReplace
   upgrade:
