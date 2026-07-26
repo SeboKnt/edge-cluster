@@ -13,18 +13,15 @@ metadata:
 value: "5"
 ---
 apiVersion: longhorn.io/v1beta2
-kind: Setting
+kind: BackupTarget
 metadata:
-  name: backup-target
+  name: default
   namespace: longhorn-system
-value: s3://velero@us-east-1/longhorn/
----
-apiVersion: longhorn.io/v1beta2
-kind: Setting
-metadata:
-  name: backup-target-credential-secret
-  namespace: longhorn-system
-value: minio-s3-credentials
+spec:
+  backupTargetURL: s3://velero@us-east-1/longhorn/
+  credentialSecret: minio-s3-credentials
+  pollInterval: 300m
+  syncRequestedAt: ""
 ---
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
