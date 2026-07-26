@@ -109,7 +109,7 @@ spec:
     - name: ceph-blockpool
         # see https://github.com/rook/rook/blob/master/Documentation/CRDs/Block-Storage/ceph-block-pool-crd.md#spec for available configuration
       spec:
-        failureDomain: host
+        failureDomain: osd
         replicated:
           size: 1
       storageClass:
@@ -130,11 +130,11 @@ spec:
               cpu: "300m"
               memory: "1Gi"
         metadataPool:
-          failureDomain: host
+          failureDomain: osd
           replicated:
             size: 1
         dataPools:
-        - failureDomain: host
+        - failureDomain: osd
           replicated:
             size: 1
       storageClass:
@@ -146,11 +146,11 @@ spec:
     - name: ceph-objectstore
       spec:
         metadataPool:
-          failureDomain: host
+          failureDomain: osd
           replicated:
             size: 1
         dataPool:
-          failureDomain: host
+          failureDomain: osd
           replicated:
             size: 1
         preservePoolsOnDelete: true
