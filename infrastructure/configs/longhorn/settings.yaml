@@ -21,7 +21,6 @@ spec:
   backupTargetURL: s3://velero@us-east-1/longhorn/
   credentialSecret: minio-s3-credentials
   pollInterval: 300m
-  syncRequestedAt: ""
 ---
 apiVersion: longhorn.io/v1beta2
 kind: RecurringJob
