@@ -206,7 +206,11 @@ spec:
         name: ceph-csi-operator
         namespace: rook-ceph
       interval: 12h
-  values: {}
+  values:
+    rbd:
+      name: "rook-ceph.rbd.csi.ceph.com"
+    cephfs:
+      name: "rook-ceph.cephfs.csi.ceph.com"
   install:
     crds: CreateReplace
   upgrade:
