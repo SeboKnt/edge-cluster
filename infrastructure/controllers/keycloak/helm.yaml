@@ -18,7 +18,7 @@ spec:
   chart:
     spec:
       chart: keycloak
-      version: 25.2.0
+      version: "*"
       sourceRef:
         kind: HelmRepository
         name: bitnami
@@ -28,8 +28,6 @@ spec:
     global:
       security:
         allowInsecureImages: true
-    image:
-      tag: "25.0.2"
     auth:
       adminUser: admin
       adminPassword: "changeme"
