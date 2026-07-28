@@ -25,8 +25,11 @@ spec:
         namespace: keycloak
       interval: 12h
   values:
-#    image:
-#      registry: public.ecr.aws
+    global:
+      security:
+        allowInsecureImages: true
+    image:
+      tag: "25.0.2-debian-12-r0"
     auth:
       adminUser: admin
       adminPassword: "changeme"
