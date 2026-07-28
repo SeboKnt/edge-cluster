@@ -30,7 +30,7 @@ spec:
           env:
             WATCH_NAMESPACE: "rook-ceph"
     csi:
-      installCsiOperator: true
+      installCsiOperator: false
     crds:
       enabled: true
   install:
