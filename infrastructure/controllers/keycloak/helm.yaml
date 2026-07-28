@@ -45,7 +45,15 @@ spec:
       existingSecret: "keycloak-db-app"
       existingSecretPasswordKey: "password"
     proxyHeaders: xforwarded
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1536Mi
+      requests:
+        cpu: 500m
+        memory: 512Mi
   install:
     crds: CreateReplace
   upgrade:
     crds: CreateReplace
+
