@@ -60,6 +60,8 @@ spec:
       enabled: true
     clusterName: rook-ceph
     cephClusterSpec:
+      skipUpgradeChecks: true
+      continueUpgradeAfterChecksEvenIfNotHealthy: true
       mon:
         count: 3
         allowMultiplePerNode: true
