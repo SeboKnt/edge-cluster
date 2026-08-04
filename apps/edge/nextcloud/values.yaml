@@ -30,9 +30,9 @@ spec:
           #accessKey: "RS4D0ZGTXWZVKPFCPE1Ek"
           #secretKey: "FsNrdQTmq8ClwfU0WioUeFzobOghDe6nJRuSXkiLk"
           legacyAuth: false
-          host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local:8080"
+          host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local"
           ssl: false
-          port: "80"
+          port: "8080"
           region: "eu-west-1"
           bucket: "ceph-bkt"
           #prefix: "your-prefix"
