@@ -26,27 +26,18 @@ spec:
         - cloud.edge.youngandhungry.org
       objectStore:
         s3:
-          enabled: true
-          #accessKey: "RS4D0ZGTXWZVKPFCPE1Ek"
-          #secretKey: "FsNrdQTmq8ClwfU0WioUeFzobOghDe6nJRuSXkiLk"
+          enabled: false
           legacyAuth: false
           host: "rook-ceph-rgw-ceph-objectstore.rook-ceph.svc.cluster.local"
           ssl: false
           port: "8080"
           region: "eu-west-1"
           bucket: "ceph-bkt"
-          #prefix: "your-prefix"
           usePathStyle: true
-          #autoCreate: false
-          #storageClass: "STANDARD"
-          #sse_c_key: "your-sse-c-key"
           existingSecret: "ceph-bucket"
           secretKeys:
-          #  host: "your-secret-key-host"
             accessKey: "AWS_ACCESS_KEY_ID"
             secretKey: "AWS_SECRET_ACCESS_KEY"
-          #  bucket: "your-secret-key-bucket"
-          #  sse_c_key: "your-secret-key-sse_c_key"
 
     internalDatabase:
       enabled: false
@@ -62,21 +53,9 @@ spec:
         secretName: nextcloud-db-secret
         usernameKey: username
         passwordKey: password
-        # hostKey: db-hostname-or-ip
-        # databaseKey: db-name
-
 
     postgresql:
       enabled: false
-      global:
-        postgresql:
-          auth:
-            username: nextcloud
-            password: changeme
-            database: nextcloud
-      primary:
-        persistence:
-          enabled: true
 
     cronjob:
       enabled: true
@@ -86,7 +65,7 @@ spec:
       enabled: true
       labels:
         recurring-job.longhorn.io/daily-backup: enabled
-      storageClass: "longhorn"
+      storageClass: "longhorn-1replica"
       annotations: {}
       accessMode: ReadWriteOnce
       size: 8Gi
@@ -94,10 +73,8 @@ spec:
       ## Useful to store data on a different storageClass (e.g. on slower disks)
       nextcloudData:
         enabled: false
-        subPath:
         annotations: {}
-        # storageClass: "-"
-        # existingClaim:
+        storageClass: "longhorn-1replica"
         accessMode: ReadWriteOnce
         size: 10Gi
 
@@ -114,7 +91,7 @@ spec:
         existingSecretPasswordKey: ""
       # Since Redis is used for caching only, you might want to use a storageClass with different reclaim policy and backup settings
       global:
-        storageClass: ""
+        storageClass: "longhorn-1replica"
       master:
         persistence:
           enabled: true
@@ -127,3 +104,6 @@ spec:
 
     metrics:
       enabled: true
+
+    nodeSelector:
+      kubernetes.io/hostname: k3s01
