@@ -1,0 +1,32 @@
+---
+apiVersion: bitnami.com/v1alpha1
+kind: SealedSecret
+metadata:
+  name: nexus-db-secret
+  namespace: nexus
+spec:
+  encryptedData:
+    password: AgB+YvjhTJYJUi5dsy35mOPSFwzL4xUtkCRQFVv5SXA4IWHPm3ZuYMDORW2j1wLGi505+8k/+SVsfY8vbMyMmuA0tutai7swGGZoFxDUmYGeRRPBapLXRkhXpA5dPpPTkq6omroZW3OHcGCyJhKXbF2c/ACwD4P63/BboXBI2yHny2sVG+JppXVs9JaCOKVCgzTF4p4cmzPdUt/hdEb7AkS1QnZVhuWD7nxc+ZsNqIcTflsur59Lc1mzutEobMkLG+oIYn9bl9BNs5JNwnoRRK8WD3z6QiNzLluZzB7oKRM39gNx93zRqJrmXmdhfcgGZ6KsythFEHyqrxxT74yU+a7xRJIGAcrFcmdP5A80DwBxTUI5b2tOzwunP4Qa/OyDqyviIHnbwnNPTdH8dWN5ZzMeBI+Yhsz7Us0UdInpd2sfJeYFauTkVoCcCoVC2/YUM614qdoHbXjrfhLaBvEv5dGrNmcH0ayqc84rIXT6IbO86d/bgz3DIA4uxaM4nP5vOWdMvf7YqjKQeCN0Sr6WUzipDRwY+Xw/czSpLKs9EHhG946uW2pNtrO4Ei3BwZShdshCn8aYYhqyxWAwBnYr4P+Xrf/DkC2dYXnK7pmD35LT5XK3HtMRHycn5zGQFB9lbPpcm0+95utMeL13dYHOmHKDMm6jD/jTai8wowgA80XNufVSjkIRq2xjA+W2jMKJRJKxEeNg13dGqg==
+    username: AgABnM064ShglnY+q0tUBf1/ozGUzqoKE5uHgbxdwoTrDxxpGI8bPNUSTRdUS2vctE3QGqt2K5nCeviwLcAGV5gMyXNlvzv99634cL7dWD3WZa1HdmdU63MlpBIqzL+bLkcsVb6QyOcBUqL1tGcqssn1K0DKw9gp/DUwSYWXxHD9abiQdJ69zkBOxDpDUVpjObBxKZJvxS3myfqGkS/AvfzSeWjjZtgGH0vQCwucAH4QA2//TYy7yitka2tjLuT5HubwK3ArS+25mDXtE3wab3NcYQ1vEJ6ysMzQabfROc3WJNQGQRq3+mhQIgV2ntrXOh8E5GdsnWnS+hQG923ydBPW9ZiFpmXMEF0Hb0zLLHenpHvlPKj5AASqWo6CWh8vvJQBIHjSbhAF1k4Zxhk2r6OVxWHEkVw4HXnzKJiruCvds4w64XMk6ErVwlo4xrhAaYPCj1sMIpIeEX1+doouCConJ7qv6W9D15IHN7zsSskLzKVWoso45iDQBPXIp4oPo3VDlRdI0+kyCXJDWA9eJwCBlkiBm6F6l37F1aJzfFnbqFRxfczQUmCcUJVoXW/L9llp+4qgoRv4jqOJVmMHqSgyVeRSeuVeka7LF2Wy+iRgSFQR9k3KUCGPzbe4saPbcEnTxb96Co5N9IuIOoHvFLNIReyP1DrGGEJtqasDNRB8Awe88LFtx/Lcc1l2M2uffBD8rLj5Vg==
+  template:
+    metadata:
+      name: nexus-db-secret
+      namespace: nexus
+    type: Opaque
+---
+apiVersion: postgresql.cnpg.io/v1
+kind: Cluster
+metadata:
+  name: nexus-db
+  namespace: nexus
+spec:
+  instances: 2
+  storage:
+    size: 20Gi
+    storageClass: longhorn
+  bootstrap:
+    initdb:
+      database: nexusdb
+      owner: nexus
+      secret:
+        name: nexus-db-secret

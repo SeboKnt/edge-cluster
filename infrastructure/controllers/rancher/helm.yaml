@@ -1,0 +1,31 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: rancher
+  namespace: cattle-system
+spec:
+  interval: 24h
+  url: https://releases.rancher.com/server-charts/latest
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: rancher
+  namespace: cattle-system
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: rancher
+      sourceRef:
+        kind: HelmRepository
+        name: rancher
+        namespace: cattle-system
+      interval: 12h
+  values:
+    hostname: rancher.edge.youngandhungry.org
+    replicas: 1
+    bootstrapPassword: "change-me-later"
+    ingress:
+      enabled: false
+    tls: external

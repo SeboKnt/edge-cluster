@@ -4,18 +4,20 @@ resources:
   - ./cilium
   - ./envoy-gateway
   - ./gateway
-  - ./capacitor
+  #- ./capacitor
   - ./cert-manager
   - ./cloudnative-pg
-  - ./flux-operator
-  - ./logging
+  #- ./flux-operator
+  #- ./logging
   - ./longhorn
-  - ./monitoring
+  #- ./monitoring
   - ./nginx-ingress
   - ./nvidia-device-plugin
   - ./rook
   - ./sealed-secret
   #- ./security
   - ./velero
-  - ./keycloak
-  - ./harbor
+  #- ./keycloak
+  #- ./harbor
+  #- ./rancher
+  #- ./nexus

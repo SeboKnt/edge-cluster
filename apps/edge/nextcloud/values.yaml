@@ -6,7 +6,7 @@ metadata:
 spec:
   chart:
     spec:
-      version: "8.7.0"
+      version: "9.2.6"
   values:
     nextcloud:
       host: cloud.edge.youngandhungry.org
@@ -39,6 +39,9 @@ spec:
             accessKey: "AWS_ACCESS_KEY_ID"
             secretKey: "AWS_SECRET_ACCESS_KEY"
 
+    podSecurityContext:
+      fsGroupChangePolicy: "OnRootMismatch"
+
     internalDatabase:
       enabled: false
       name: nextcloud
@@ -65,7 +68,7 @@ spec:
       enabled: true
       labels:
         recurring-job.longhorn.io/daily-backup: enabled
-      storageClass: "longhorn-1replica"
+      storageClass: "longhorn"
       annotations: {}
       accessMode: ReadWriteOnce
       size: 8Gi

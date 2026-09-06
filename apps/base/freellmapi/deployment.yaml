@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: freellmapi
+  namespace: freellmapi
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: freellmapi
+  template:
+    metadata:
+      labels:
+        app: freellmapi
+    spec:
+      containers:
+        - name: freellmapi
+          image: ghcr.io/tashfeenahmed/freellmapi:latest
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: NODE_ENV
+              value: "production"
+            - name: PORT
+              value: "3001"
+            - name: ENCRYPTION_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: freellmapi-secret
+                  key: ENCRYPTION_KEY
+          ports:
+            - containerPort: 3001
+              name: http
+          volumeMounts:
+            - name: data
+              mountPath: /app/server/data
+          livenessProbe:
+            httpGet:
+              path: /api/ping
+              port: http
+            initialDelaySeconds: 15
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: freellmapi-data

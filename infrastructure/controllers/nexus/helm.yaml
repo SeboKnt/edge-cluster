@@ -1,0 +1,50 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: sonatype
+  namespace: nexus
+spec:
+  interval: 24h
+  url: https://sonatype.github.io/helm3-charts/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: nexus
+  namespace: nexus
+spec:
+  interval: 30m
+  chart:
+    spec:
+      chart: nexus-repository-manager
+      sourceRef:
+        kind: HelmRepository
+        name: sonatype
+        namespace: nexus
+      interval: 12h
+  values:
+    nexus:
+      env:
+        - name: INSTALL4J_ADD_VM_PARAMS
+          value: |-
+            -Xms2703M -Xmx2703M
+            -XX:+UnlockExperimentalVMOptions -XX:ActiveProcessorCount=4
+            -XX:+UseCGroupMemoryLimitForHeap
+            -Djava.util.prefs.userRoot=/nexus-data/javaprefs
+            -Dnexus.datastore.enabled=true
+            -Dnexus.datastore.nexus.jdbcUrl=jdbc:postgresql://nexus-db-rw.nexus.svc.cluster.local:5432/nexusdb
+            -Dnexus.datastore.nexus.username=nexus
+            -Dnexus.datastore.nexus.password=nexus123
+        - name: NEXUS_SECURITY_RANDOMPASSWORD
+          value: "true"
+      docker:
+        enabled: true
+        registries:
+          - port: 5000
+            secretName: ""
+    ingress:
+      enabled: false
+    persistence:
+      enabled: true
+      storageClass: ceph-block
+      storageSize: 100Gi
