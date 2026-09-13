@@ -4,6 +4,6 @@ resources:
   - ./cert-manager
   - ./gateway
   - ./longhorn
-  - ./monitoring
+  #- ./monitoring
   - ./velero
   # ./nexus
