@@ -1,0 +1,36 @@
+apiVersion: operator.knative.dev/v1beta1
+kind: KnativeServing
+metadata:
+  name: knative-serving
+  namespace: knative-serving
+spec:
+  ingress:
+    # Envoy Gateway / Gateway API integration (net-gateway-api)
+    gateway-api:
+      enabled: true
+  config:
+    network:
+      ingress-class: "gateway-api.ingress.networking.knative.dev"
+      default-external-scheme: "https"
+      auto-tls: "Disabled"
+    domain:
+      # Suffix for Knative services: <service>.<namespace>.edge.youngandhungry.org
+      edge.youngandhungry.org: ""
+    gateway:
+      external-gateways: |
+        - class: eg
+          gateway: kube-system/shared-gateway
+          service: kube-system/envoy-kube-system-shared-gateway
+          supported-features:
+          - HTTPRouteRequestTimeout
+      local-gateways: |
+        - class: eg
+          gateway: kube-system/shared-gateway
+          service: kube-system/envoy-kube-system-shared-gateway
+          supported-features:
+          - HTTPRouteRequestTimeout
+    autoscaler:
+      # Knative Pod Autoscaler (KPA) defaults
+      enable-scale-to-zero: "true"
+      scale-to-zero-grace-period: "30s"
+      scale-to-zero-pod-retention-period: "0s"

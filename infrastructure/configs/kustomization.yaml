@@ -6,4 +6,5 @@ resources:
   - ./longhorn
   #- ./monitoring
   - ./velero
+  #- ./knative
   # ./nexus
