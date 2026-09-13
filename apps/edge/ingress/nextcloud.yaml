@@ -11,6 +11,8 @@ spec:
   hostnames:
   - "cloud.edge.youngandhungry.org"
   rules:
-  - backendRefs:
+  - timeouts:
+      request: 2h
+    backendRefs:
     - name: nextcloud
       port: 8080
