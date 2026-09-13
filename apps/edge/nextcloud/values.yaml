@@ -82,7 +82,8 @@ spec:
         size: 10Gi
 
     redis:
-      enabled: false
+      enabled: true
+      architecture: standalone
       image:
         repository: bitnamilegacy/redis
       auth:
@@ -97,10 +98,7 @@ spec:
         storageClass: "longhorn-1replica"
       master:
         persistence:
-          enabled: true
-      replica:
-        persistence:
-          enabled: true
+          enabled: false
 
     imaginary:
       enabled: true
