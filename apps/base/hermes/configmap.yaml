@@ -13,4 +13,4 @@ data:
     dashboard:
       basic_auth:
         username: "admin"
-        password_hash: "KTSdOQUZfdSDAiDTiLou7ui+LzHXkIlI76b3Cp3jmms="
+        password_hash: "scrypt$16384$8$1$+FJo93juwqneElY76/oN3w==$iIYJofS3oT/IJa+Q88duBqTj57REDAKaRJ6rYMHDfOM="
