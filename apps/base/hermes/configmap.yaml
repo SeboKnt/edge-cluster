@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: hermes-config
+  namespace: hermes
+data:
+  config.yaml: |
+    model:
+      provider: ollama
+      default: qwen2.5-coder:7b
+      base_url: http://ollama.llama.svc.cluster.local:11434
+      api_mode: chat_completions
