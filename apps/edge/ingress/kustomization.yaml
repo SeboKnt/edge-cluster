@@ -6,5 +6,5 @@ resources:
   - ./owntrack-files.yaml
   - ./rook-dashboard.yaml
   - ./longhorn.yaml
-  #- ./openwebui.yaml
-  #- ./llama.yaml
+  - ./openwebui.yaml
+  - ./llama.yaml
