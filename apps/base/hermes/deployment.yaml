@@ -48,8 +48,8 @@ spec:
         - name: hermes
           image: nousresearch/hermes-agent:latest
           imagePullPolicy: IfNotPresent
-          command:
-            - gateway 
+          args:
+            - gateway
             - run
           env:
             - name: HERMES_UID
