@@ -58,6 +58,8 @@ spec:
               value: "1000"
             - name: HERMES_DASHBOARD
               value: "1"
+            - name: PATH
+              value: "/usr/local/bin:/usr/bin:/bin"
           ports:
             - name: gateway
               containerPort: 8642
