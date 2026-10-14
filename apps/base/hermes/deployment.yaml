@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hermes
+  namespace: hermes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hermes
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: hermes
+    spec:
+      automountServiceAccountToken: false
+      securityContext:
+        fsGroup: 1000
+        seccompProfile:
+          type: RuntimeDefault
+      containers:
+        - name: hermes
+          image: nousresearch/hermes-agent:latest
+          imagePullPolicy: IfNotPresent
+          command:
+            - gateway
+            - run
+          env:
+            - name: HERMES_UID
+              value: "1000"
+            - name: HERMES_GID
+              value: "1000"
+            - name: HERMES_DASHBOARD
+              value: "1"
+          ports:
+            - name: gateway
+              containerPort: 8642
+              protocol: TCP
+            - name: dashboard
+              containerPort: 9119
+              protocol: TCP
+          resources:
+            requests:
+              memory: 256Mi
+              cpu: 250m
+            limits:
+              memory: 2Gi
+              cpu: "1"
+          volumeMounts:
+            - name: data
+              mountPath: /opt/data
+          livenessProbe:
+            httpGet:
+              path: /
+              port: gateway
+            initialDelaySeconds: 30
+            periodSeconds: 30
+            timeoutSeconds: 5
+            failureThreshold: 3
+          readinessProbe:
+            httpGet:
+              path: /
+              port: gateway
+            initialDelaySeconds: 15
+            periodSeconds: 10
+            timeoutSeconds: 5
+            failureThreshold: 3
+      volumes:
+        - name: data
+          persistentVolumeClaim:
+            claimName: hermes-data

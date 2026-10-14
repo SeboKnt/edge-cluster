@@ -8,3 +8,4 @@ resources:
   - ./longhorn.yaml
   - ./openwebui.yaml
   - ./llama.yaml
+  - ./hermes.yaml
