@@ -9,7 +9,7 @@ spec:
   - name: shared-gateway
     namespace: kube-system
   hostnames:
-  - "hermes.edge.youngandhungry.org"
+  - "hermes-gw.edge.youngandhungry.org"
   rules:
   - backendRefs:
     - name: hermes
@@ -25,7 +25,7 @@ spec:
   - name: shared-gateway
     namespace: kube-system
   hostnames:
-  - "hermes-dash.edge.youngandhungry.org"
+  - "hermes.edge.youngandhungry.org"
   rules:
   - backendRefs:
     - name: hermes
