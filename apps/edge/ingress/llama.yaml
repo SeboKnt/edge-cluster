@@ -1,0 +1,16 @@
+---
+apiVersion: gateway.networking.k8s.io/v1
+kind: HTTPRoute
+metadata:
+  name: llama
+  namespace: llama
+spec:
+  parentRefs:
+  - name: shared-gateway
+    namespace: kube-system
+  hostnames:
+  - "llama.edge.youngandhungry.org"
+  rules:
+  - backendRefs:
+    - name: ollama
+      port: 11434

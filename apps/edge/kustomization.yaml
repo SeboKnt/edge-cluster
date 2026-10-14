@@ -4,6 +4,4 @@ resources:
   - ./ingress
   - ./nextcloud
   - ./owntrack
-  #- ./ai
-  #- ./freellmapi
-  #- ../base/homeassistant
+  - ./llama

@@ -1,0 +1,59 @@
+apiVersion: source.toolkit.fluxcd.io/v1
+kind: HelmRepository
+metadata:
+  name: ollama
+  namespace: llama
+spec:
+  interval: 24h
+  url: https://helm.otwld.com/
+---
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: ollama
+  namespace: llama
+spec:
+  interval: 2h
+  chart:
+    spec:
+      chart: ollama
+      sourceRef:
+        kind: HelmRepository
+        name: ollama
+        namespace: llama
+      interval: 2h
+  install:
+    disableWait: true
+    remediation:
+      retries: 3
+  upgrade:
+    disableWait: true
+    remediation:
+      retries: 3
+  values:
+    runtimeClassName: nvidia
+    ollama:
+      gpu:
+        enabled: true
+        type: 'nvidia'
+        number: 1
+      models:
+        pull:
+          - qwen3.5:9b
+    nodeSelector:
+      kubernetes.io/hostname: k3s03
+    tolerations:
+      - key: "nvidia.com/gpu"
+        operator: "Exists"
+        effect: "NoSchedule"
+    extraEnv:
+      - name: OLLAMA_NUM_PARALLEL
+        value: "1"
+      - name: OLLAMA_KEEP_ALIVE
+        value: "24h"
+      - name: OLLAMA_FLASH_ATTENTION
+        value: "0"
+    persistentVolume:
+      enabled: true
+      size: 40Gi
+      storageClassName: longhorn-1replica
