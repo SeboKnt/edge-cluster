@@ -10,3 +10,7 @@ data:
       default: qwen2.5-coder:7b
       base_url: http://ollama.llama.svc.cluster.local:11434
       api_mode: chat_completions
+    dashboard:
+      basic_auth:
+        username: "admin"
+        password_hash: "KTSdOQUZfdSDAiDTiLou7ui+LzHXkIlI76b3Cp3jmms="
