@@ -49,8 +49,9 @@ spec:
           image: nousresearch/hermes-agent:latest
           imagePullPolicy: IfNotPresent
           command:
-            - /usr/local/bin/gateway
-            - run
+            - /bin/sh
+            - -c
+            - gateway run
           env:
             - name: HERMES_UID
               value: "1000"
