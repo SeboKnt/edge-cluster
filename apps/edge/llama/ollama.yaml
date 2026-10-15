@@ -39,7 +39,7 @@ spec:
         number: 1
       models:
         pull:
-          - qwen2.5-coder:7b
+          - qwen3.5:9b
     nodeSelector:
       kubernetes.io/hostname: k3s03
     tolerations:
