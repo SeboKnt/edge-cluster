@@ -8,7 +8,7 @@ data:
     model:
       provider: ollama
       default: qwen2.5-coder:7b
-      base_url: http://ollama.llama.svc.cluster.local:11434
+      base_url: http://ollama.llama.svc.cluster.local:11434/v1
       api_mode: chat_completions
       ollama_num_ctx: 65536
     dashboard:
