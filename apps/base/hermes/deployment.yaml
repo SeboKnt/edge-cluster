@@ -48,6 +48,8 @@ spec:
         - name: hermes
           image: nousresearch/hermes-agent:latest
           imagePullPolicy: IfNotPresent
+          tty: true
+          stdin: true
           env:
             - name: HERMES_UID
               value: "1000"
@@ -72,22 +74,6 @@ spec:
           volumeMounts:
             - name: data
               mountPath: /opt/data
-          livenessProbe:
-            httpGet:
-              path: /
-              port: gateway
-            initialDelaySeconds: 30
-            periodSeconds: 30
-            timeoutSeconds: 5
-            failureThreshold: 3
-          readinessProbe:
-            httpGet:
-              path: /
-              port: gateway
-            initialDelaySeconds: 15
-            periodSeconds: 10
-            timeoutSeconds: 5
-            failureThreshold: 3
       volumes:
         - name: data
           persistentVolumeClaim:
