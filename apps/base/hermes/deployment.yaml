@@ -48,7 +48,7 @@ spec:
         - name: hermes
           image: nousresearch/hermes-agent:latest
           imagePullPolicy: IfNotPresent
-          args:
+          command:
             - gateway
             - run
           env:
